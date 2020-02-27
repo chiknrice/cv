@@ -1,0 +1,98 @@
+name: Adrian Bondoc
+
+education:
+  - school: Don Bosco Technical College
+    end-year: 1999
+    course: Electronics and Communications Engineering
+
+address:
+  - 60A Sheridan Terrace
+  - Johnsonville
+  - Wellington 6037
+  - New Zealand
+
+contact:
+  mobile: +64225131977
+  email: bondoc.amr@gmail.com
+  twitter: @chiknrice
+  github: https://github.com/chiknrice
+
+summary: >-
+  Adrian is a full-stack developer capable of working on different
+  business domains using industry-standard tools as well as cutting-edge
+  technologies.  He gained most of his professional experience working on
+  payment-related systems, but has also had the opportunity to contribute on
+  the development of a number of mobile application projects and content
+  management systems.  Aside from developing applications, he also enjoys
+  designing and building automated tests and contributing to the open source
+  community.
+
+experience:
+  - start-date: 30/07/2019
+    role: Software Developer
+    company: Westpac
+    location: New Zealand
+    projects:
+      - title: WestpacONE Enhancements
+        description: >-
+          Implemented new features and enhancements to the internet banking
+          application.
+      - title: Tandem Authentication Migration
+        description: >-
+          Implemented changes to allow for moving authentication of customers
+          using Westpac One Internet Banking from Tandem to Forge Rock. The
+          project aims to address performance-related issues caused by high
+          volume of authentication traffic going to Tandem during peak season.
+  - start-date: 18/02/2019
+    end-date: 29/07/2019
+    role: Software Developer
+    company: ANZ
+    location: New Zealand
+    projects:
+      - title: Canary Deployments
+        description: >-
+          Implemented changes to multi auth payments micro service to mitigate
+          risks during production deployments (first of many services to change
+          the way deployment is done).
+      - title: Modica AU
+        description: >-
+          Integrated an additional SMS downstream service which delivers
+          verification codes to internet banking customers’ mobile devices.
+      - title: Multi Auth Payments
+        description: >-
+          Implemented the micro service responsible facilitating
+          multi-authoriser payments initiated by Internet Banking and GoMoney
+          mobile application.
+  - start-date: 05/06/2017
+    end-date: 15/02/2019
+    role: Software Developer
+    company: ANZ
+    location: New Zealand
+    projects:
+      - title: ADO
+        description: >-
+          Implemented features of ADO (ANZ Direct Online) which is a banking web
+          application that allows businesses to manage payments (batched, same
+          day, international) and provides facilities such as multiple
+          authorisers, auditing, batch payment import and reporting.
+      - title: DLAT
+        description: >-
+          Implemented features for DLAT (Vaadin based web application) which is
+          the administration component of ADO used internally by bank employees
+          to manage ADO users and client information as well as monitoring of
+          payment transactions.
+      - title: Linux VM Configuration
+        description: >-
+          Automated configuration of Linux VMs to be used for docker swarm,
+          jenkins and other containerised services using Ansible.
+      - title: Development Jenkins
+        description: >-
+          Automated dockerised Jenkins (master and slaves) configuration via
+          docker files and configuration as code plugin.
+      - title: Jenkins Delivery Pipeline
+        description: >-
+          Integrated a number of individual parameterised jobs which was used
+          to build/test, release, and deploy the application’s binaries to a
+          streamlined multi-branch build pipeline with additional features
+          such as docker build slaves, docker image builds, and deploying
+          stacks to docker swarm for each tester.
