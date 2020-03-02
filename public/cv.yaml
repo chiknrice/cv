@@ -2,6 +2,7 @@ name: Adrian Bondoc
 
 education:
   - school: Don Bosco Technical College
+    start-year: 1993
     end-year: 1999
     course: Electronics and Communications Engineering
 
@@ -12,9 +13,9 @@ address:
   - New Zealand
 
 contact:
-  mobile: +64225131977
+  mobile: '+64225131977'
   email: bondoc.amr@gmail.com
-  twitter: @chiknrice
+  twitter: '@chiknrice'
   github: https://github.com/chiknrice
 
 summary: >-
@@ -43,6 +44,7 @@ experience:
           using Westpac One Internet Banking from Tandem to Forge Rock. The
           project aims to address performance-related issues caused by high
           volume of authentication traffic going to Tandem during peak season.
+
   - start-date: 18/02/2019
     end-date: 29/07/2019
     role: Software Developer
@@ -63,6 +65,7 @@ experience:
           Implemented the micro service responsible facilitating
           multi-authoriser payments initiated by Internet Banking and GoMoney
           mobile application.
+
   - start-date: 05/06/2017
     end-date: 15/02/2019
     role: Software Developer
@@ -96,3 +99,80 @@ experience:
           streamlined multi-branch build pipeline with additional features
           such as docker build slaves, docker image builds, and deploying
           stacks to docker swarm for each tester.
+      - title: SVN to Git Migration
+        description: >-
+          Helped with moving sources from SVN to Git.  Implemented a branching
+          strategy which allowed the team to work on features independently,
+          and integrated code reviews via pull request workflow.
+      - title: Ant to Gradle Migration
+        description: >-
+          Switched the Ant with shell scripts build solution to Gradle which
+          drastically shortened build time, reduced source repository size,
+          and improved maintainability. This also lessen the effort for new
+          developers to start working on ADO.
+      - title: Perimeter Security
+        description: >-
+          Implemented a pre-authentication server which authenticates users
+          and issues temporary access tokens (JWT) that allows authenticated
+          users to gain a secure session with the ADO web application.  Secure
+          sessions were also implemented using JWT.
+
+  - start-date: 23/07/2014
+    end-date: 02/06/2017
+    role: Java Developer
+    company: Verifone/Eftpos
+    location: New Zealand
+
+  - start-date: 03/09/2012
+    end-date: 15/10/2014
+    role: Line Manager / Technical Lead
+    company: iScale Solutions
+    location: Singapore
+
+  - start-date: 14/03/2012
+    end-date: 31/08/2012
+    role: Technical Lead
+    company: iScale Solutions
+    location: Singapore
+
+  - start-date: 31/10/2011
+    end-date: 13/03/2012
+    role: Senior Java & Oracle Developer
+    company: New Edge Financial
+    location: Singapore
+
+  - start-date: 17/11/2007
+    end-date: 25/10/2011
+    role: Product Development Engineer
+    company: Welcome Real-Time
+    location: Singapore
+
+  - start-date: 12/03/2007
+    end-date: 14/11/2008
+    role: Maintenance Development Engineer
+    company: Welcome Real-Time
+    location: Singapore
+
+  - start-date: 01/02/2006
+    end-date: 09/03/2007
+    role: Senior Software Developer
+    company: iPop Networks
+    location: Singapore
+
+  - start-date: 05/09/2005
+    end-date: 03/02/2006
+    role: Software Engineer
+    company: GXS
+    location: Philippines
+
+  - start-date: 25/01/2005
+    end-date: 02/09/2005
+    role: Software Engineer
+    company: Standfirst Mobile
+    location: Philippines
+
+  - start-date: 08/03/2004
+    end-date: 31/12/2004
+    role: Systems Administrator / Java Developer
+    company: TinCan Mobile
+    location: Philippines
