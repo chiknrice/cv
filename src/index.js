@@ -2,12 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import yaml from 'js-yaml';
-import { store, cvSlice } from './store';
+import { store, cvActions } from './store';
 import Loadable from 'react-loadable';
-import { CssBaseline, Container, CircularProgress } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import {
+  ThemeProvider,
+  CssBaseline,
+  Container,
+  CircularProgress,
+  createMuiTheme
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import { blue, orange } from '@material-ui/core/colors';
 
-const styles = theme => ({
+const useStyles = makeStyles({
   loaderContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -16,7 +23,15 @@ const styles = theme => ({
   }
 });
 
-const Loading = withStyles(styles)(({ error, retry, classes }) => {
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: orange
+  }
+});
+
+const Loading = ({ error, retry }) => {
+  const classes = useStyles();
   if (error) {
     return (
       <div>
@@ -25,13 +40,15 @@ const Loading = withStyles(styles)(({ error, retry, classes }) => {
     );
   } else {
     return (
-      <Container className={classes.loaderContainer}>
-        <CssBaseline />
-        <CircularProgress />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container className={classes.loaderContainer}>
+          <CssBaseline />
+          <CircularProgress />
+        </Container>
+      </ThemeProvider>
     );
   }
-});
+};
 
 const LoadableApp = Loadable.Map({
   loader: {
@@ -43,10 +60,12 @@ const LoadableApp = Loadable.Map({
   },
   loading: Loading,
   render(loaded, _) {
-    store.dispatch(cvSlice.actions.setCv(loaded.cv));
+    store.dispatch(cvActions.setCv(loaded.cv));
     return (
       <Provider store={store}>
-        <loaded.module.App />
+        <ThemeProvider theme={theme}>
+          <loaded.module.App />
+        </ThemeProvider>
       </Provider>
     );
   }

@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-export const cvSlice = createSlice({
+const cvSlice = createSlice({
   name: 'cv',
   initialState: { loading: true },
   reducers: {
@@ -13,12 +13,21 @@ export const CurrentView = {
   JOB_DETAIL: 'JOB_DETAIL'
 };
 
-export const uiSlice = createSlice({
+const uiSlice = createSlice({
   name: 'ui',
-  initialState: { view: CurrentView.TIMELINE },
+  initialState: { view: CurrentView.TIMELINE, selectedDate: 'none' },
   reducers: {
     setCurrentView: (state, action) => {
       state.view = action.payload;
+    },
+    setSelectedDate: (state, action) => {
+      state.selectedDate =
+        state.selectedDate !== 'none' && state.selectedDate === action.payload
+          ? 'none'
+          : action.payload;
+    },
+    unsetSelectedDate: state => {
+      delete state.selectedDate;
     }
   }
 });
@@ -29,3 +38,6 @@ export const store = configureStore({
     cv: cvSlice.reducer
   }
 });
+
+export const uiActions = uiSlice.actions;
+export const cvActions = cvSlice.actions;
