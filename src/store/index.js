@@ -8,18 +8,12 @@ const cvSlice = createSlice({
   }
 });
 
-export const CurrentView = {
-  TIMELINE: 'TIMELINE',
-  JOB_DETAIL: 'JOB_DETAIL'
-};
-
 const uiSlice = createSlice({
   name: 'ui',
   initialState: {
     themeOptions: {
       paletteType: 'light'
     },
-    view: CurrentView.TIMELINE,
     selectedDate: 'first'
   },
   reducers: {
@@ -27,14 +21,8 @@ const uiSlice = createSlice({
       state.themeOptions.paletteType =
         state.themeOptions.paletteType === 'light' ? 'dark' : 'light';
     },
-    setCurrentView: (state, action) => {
-      state.view = action.payload;
-    },
     setSelectedDate: (state, action) => {
-      state.selectedDate =
-        state.selectedDate !== 'first' && state.selectedDate === action.payload
-          ? 'first'
-          : action.payload;
+      state.selectedDate = action.payload;
     }
   }
 });

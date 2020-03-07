@@ -49,7 +49,7 @@ export const Header = connect(
   const theme = useTheme();
   return (
     <AppBar
-      position="sticky"
+      position="static"
       color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
     >
       <Toolbar>
