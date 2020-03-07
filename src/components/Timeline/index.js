@@ -67,7 +67,8 @@ const WorkIcon = ({ active }) => {
   return <Work color={active ? 'primary' : 'disabled'} />;
 };
 
-const WorkExperience = ({ experience, active, details, handleClick }) => {
+const WorkExperience = props => {
+  const { experience, active, details, handleClick, ...stepProps } = props;
   const { startDate, endDate, role, company, location } = experience;
   const label = (
     <Typography
@@ -80,12 +81,13 @@ const WorkExperience = ({ experience, active, details, handleClick }) => {
       color={active ? 'textPrimary' : 'textSecondary'}
     >{`${startDate} - ${endDate}`}</Typography>
   );
+
   return (
     <Step
-      key={startDate}
       active={active}
       completed={false}
       onClick={() => handleClick(startDate)}
+      {...stepProps}
     >
       <StepLabel
         StepIconComponent={WorkIcon}
@@ -126,6 +128,7 @@ export const Timeline = connect(
       ) : null;
     return (
       <WorkExperience
+        key={experience.startDate}
         experience={experience}
         active={active}
         details={details}
