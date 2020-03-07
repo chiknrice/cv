@@ -46,7 +46,7 @@ const selectedDateProjectsSelector = createSelector(
 );
 
 const mapDispatchToProps = dispatch => ({
-  selectDate: date => dispatch(uiActions.setSelectedDate(date))
+  handleExperienceClick: date => dispatch(uiActions.setSelectedDate(date))
 });
 
 const mapStateToProps = state => ({
@@ -62,58 +62,67 @@ const WorkIcon = ({ active }) => {
 export const Timeline = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ selectedDate, selectedDateProjects, experiences, selectDate }) => {
-  const timelineElements = experiences.map(
-    ({ startDate, endDate, role, company, location }) => {
-      const active = startDate === selectedDate;
-      const label = (
-        <Typography
-          variant={active ? 'h6' : 'subtitle1'}
-        >{`${company} (${location}) - ${role}`}</Typography>
-      );
-      const caption = (
-        <Typography
-          variant={active ? 'subtitle1' : 'subtitle2'}
-          color={active ? 'textPrimary' : 'textSecondary'}
-        >{`${startDate} - ${endDate}`}</Typography>
-      );
-      const listItems =
-        active && selectedDateProjects
-          ? selectedDateProjects.map(project => (
-              <ListItem key={project.title}>
-                <ListItemText
-                  primary={project.title}
-                  primaryTypographyProps={{ variant: 'body1' }}
-                  secondary={project.description}
-                  secondaryTypographyProps={{ variant: 'body2' }}
-                />
-              </ListItem>
-            ))
-          : null;
-      const content = listItems ? <List>{listItems}</List> : null;
+)(
+  ({
+    selectedDate,
+    selectedDateProjects,
+    experiences,
+    handleExperienceClick
+  }) => {
+    const timelineElements = experiences.map(
+      ({ startDate, endDate, role, company, location }) => {
+        const active = startDate === selectedDate;
+        const label = (
+          <Typography
+            variant={active ? 'h6' : 'subtitle1'}
+          >{`${company} (${location}) - ${role}`}</Typography>
+        );
+        const caption = (
+          <Typography
+            variant={active ? 'subtitle1' : 'subtitle2'}
+            color={active ? 'textPrimary' : 'textSecondary'}
+          >{`${startDate} - ${endDate}`}</Typography>
+        );
+        const projectListItems =
+          active && selectedDateProjects
+            ? selectedDateProjects.map(project => (
+                <ListItem key={project.title}>
+                  <ListItemText
+                    primary={project.title}
+                    primaryTypographyProps={{ variant: 'body1' }}
+                    secondary={project.description}
+                    secondaryTypographyProps={{ variant: 'body2' }}
+                  />
+                </ListItem>
+              ))
+            : null;
+        const content = projectListItems ? (
+          <List>{projectListItems}</List>
+        ) : null;
 
-      return (
-        <Step
-          key={startDate}
-          active={active}
-          completed={false}
-          onClick={() => selectDate(startDate)}
-        >
-          <StepLabel
-            StepIconComponent={WorkIcon}
-            StepIconProps={{ active }}
-            optional={caption}
+        return (
+          <Step
+            key={startDate}
+            active={active}
+            completed={false}
+            onClick={() => handleExperienceClick(startDate)}
           >
-            {label}
-          </StepLabel>
-          <StepContent>{content}</StepContent>
-        </Step>
-      );
-    }
-  );
-  return (
-    <Stepper orientation="vertical" nonLinear={true}>
-      {timelineElements}
-    </Stepper>
-  );
-});
+            <StepLabel
+              StepIconComponent={WorkIcon}
+              StepIconProps={{ active }}
+              optional={caption}
+            >
+              {label}
+            </StepLabel>
+            <StepContent>{content}</StepContent>
+          </Step>
+        );
+      }
+    );
+    return (
+      <Stepper orientation="vertical" nonLinear={true}>
+        {timelineElements}
+      </Stepper>
+    );
+  }
+);

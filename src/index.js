@@ -3,15 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import yaml from 'js-yaml';
 import { store, cvActions } from './store';
+import { ThemeProvider } from './components/ThemeProvider';
 import Loadable from 'react-loadable';
-import {
-  ThemeProvider,
-  CssBaseline,
-  Container,
-  CircularProgress,
-  createMuiTheme
-} from '@material-ui/core';
-import { blue, orange } from '@material-ui/core/colors';
+import { CssBaseline, Container, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
@@ -20,13 +14,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh'
-  }
-});
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: orange
   }
 });
 
@@ -40,12 +27,10 @@ const Loading = ({ error, retry }) => {
     );
   } else {
     return (
-      <ThemeProvider theme={theme}>
-        <Container className={classes.loaderContainer}>
-          <CssBaseline />
-          <CircularProgress />
-        </Container>
-      </ThemeProvider>
+      <Container className={classes.loaderContainer}>
+        <CssBaseline />
+        <CircularProgress />
+      </Container>
     );
   }
 };
@@ -61,14 +46,18 @@ const LoadableApp = Loadable.Map({
   loading: Loading,
   render(loaded, _) {
     store.dispatch(cvActions.setCv(loaded.cv));
-    return (
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <loaded.module.App />
-        </ThemeProvider>
-      </Provider>
-    );
+    return <loaded.module.App />;
   }
 });
 
-ReactDOM.render(<LoadableApp />, document.getElementById('root'));
+const Root = props => {
+  return (
+    <Provider store={store}>
+      <ThemeProvider>
+        <LoadableApp />
+      </ThemeProvider>
+    </Provider>
+  );
+};
+
+ReactDOM.render(<Root />, document.getElementById('root'));

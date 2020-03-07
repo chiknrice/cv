@@ -16,9 +16,12 @@ import {
   History,
   Email,
   PhoneIphone,
-  GitHub
+  GitHub,
+  Brightness4,
+  Brightness5
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import { uiActions } from '../../store';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -34,8 +37,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const mapStateToProps = state => ({ cv: state.cv });
+const mapDispatchToProps = dispatch => ({
+  handleTogglePaletteTypeClick: () => dispatch(uiActions.togglePaletteType())
+});
 
-export const Header = connect(mapStateToProps)(({ cv }) => {
+export const Header = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ cv, handleTogglePaletteTypeClick }) => {
   const classes = useStyles();
   const theme = useTheme();
   return (
@@ -85,6 +94,15 @@ export const Header = connect(mapStateToProps)(({ cv }) => {
               target="_blank"
             >
               <GitHub />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Toggle light/dark theme">
+            <IconButton color="inherit" onClick={handleTogglePaletteTypeClick}>
+              {theme.palette.type === 'light' ? (
+                <Brightness4 />
+              ) : (
+                <Brightness5 />
+              )}
             </IconButton>
           </Tooltip>
         </Hidden>

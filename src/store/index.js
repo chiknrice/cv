@@ -15,8 +15,18 @@ export const CurrentView = {
 
 const uiSlice = createSlice({
   name: 'ui',
-  initialState: { view: CurrentView.TIMELINE, selectedDate: 'none' },
+  initialState: {
+    themeOptions: {
+      paletteType: 'light'
+    },
+    view: CurrentView.TIMELINE,
+    selectedDate: 'none'
+  },
   reducers: {
+    togglePaletteType: state => {
+      state.themeOptions.paletteType =
+        state.themeOptions.paletteType === 'light' ? 'dark' : 'light';
+    },
     setCurrentView: (state, action) => {
       state.view = action.payload;
     },
