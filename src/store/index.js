@@ -20,7 +20,7 @@ const uiSlice = createSlice({
       paletteType: 'light'
     },
     view: CurrentView.TIMELINE,
-    selectedDate: 'none'
+    selectedDate: 'first'
   },
   reducers: {
     togglePaletteType: state => {
@@ -32,12 +32,9 @@ const uiSlice = createSlice({
     },
     setSelectedDate: (state, action) => {
       state.selectedDate =
-        state.selectedDate !== 'none' && state.selectedDate === action.payload
-          ? 'none'
+        state.selectedDate !== 'first' && state.selectedDate === action.payload
+          ? 'first'
           : action.payload;
-    },
-    unsetSelectedDate: state => {
-      delete state.selectedDate;
     }
   }
 });

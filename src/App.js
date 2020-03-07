@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CssBaseline, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { Header, Landing, Timeline } from './components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -12,21 +12,18 @@ export const App = connect(mapStateToProps)(({ cv }) => {
   }
   // const classes = useStyles();
   return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="md">
-        <Router>
-          <Header />
-          <Switch>
-            <Route path="/" exact={true}>
-              <Landing />
-            </Route>
-            <Route path="/timeline">
-              <Timeline />
-            </Route>
-          </Switch>
-        </Router>
-      </Container>
-    </>
+    <Container maxWidth="md">
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/" exact={true}>
+            <Landing />
+          </Route>
+          <Route path="/timeline">
+            <Timeline />
+          </Route>
+        </Switch>
+      </Router>
+    </Container>
   );
 });

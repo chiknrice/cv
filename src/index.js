@@ -28,7 +28,6 @@ const Loading = ({ error, retry }) => {
   } else {
     return (
       <Container className={classes.loaderContainer}>
-        <CssBaseline />
         <CircularProgress />
       </Container>
     );
@@ -54,6 +53,7 @@ const Root = props => {
   return (
     <Provider store={store}>
       <ThemeProvider>
+        <CssBaseline />
         <LoadableApp />
       </ThemeProvider>
     </Provider>

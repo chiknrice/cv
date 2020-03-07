@@ -34,15 +34,15 @@ const workExperiencesSummarySelector = createSelector(
     }))
 );
 
-const selectedDateProjectsSelector = createSelector(
+const selectedDateExperienceSelector = createSelector(
   selectedDateSelector,
   workExperiencesSelector,
-  (selectedDate, workExperiences) => {
-    const found = workExperiences.find(
-      workExperience => workExperience['start-date'] === selectedDate
-    );
-    return found ? found.projects : null;
-  }
+  (selectedDate, workExperiences) =>
+    selectedDate === 'first'
+      ? workExperiences[0]
+      : workExperiences.find(
+          workExperience => workExperience['start-date'] === selectedDate
+        )
 );
 
 const mapDispatchToProps = dispatch => ({
@@ -50,8 +50,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  selectedDate: selectedDateSelector(state),
-  selectedDateProjects: selectedDateProjectsSelector(state),
+  selectedTimelineElement: selectedDateExperienceSelector(state),
   experiences: workExperiencesSummarySelector(state)
 });
 
@@ -62,67 +61,59 @@ const WorkIcon = ({ active }) => {
 export const Timeline = connect(
   mapStateToProps,
   mapDispatchToProps
-)(
-  ({
-    selectedDate,
-    selectedDateProjects,
-    experiences,
-    handleExperienceClick
-  }) => {
-    const timelineElements = experiences.map(
-      ({ startDate, endDate, role, company, location }) => {
-        const active = startDate === selectedDate;
-        const label = (
-          <Typography
-            variant={active ? 'h6' : 'subtitle1'}
-          >{`${company} (${location}) - ${role}`}</Typography>
-        );
-        const caption = (
-          <Typography
-            variant={active ? 'subtitle1' : 'subtitle2'}
-            color={active ? 'textPrimary' : 'textSecondary'}
-          >{`${startDate} - ${endDate}`}</Typography>
-        );
-        const projectListItems =
-          active && selectedDateProjects
-            ? selectedDateProjects.map(project => (
-                <ListItem key={project.title}>
-                  <ListItemText
-                    primary={project.title}
-                    primaryTypographyProps={{ variant: 'body1' }}
-                    secondary={project.description}
-                    secondaryTypographyProps={{ variant: 'body2' }}
-                  />
-                </ListItem>
-              ))
-            : null;
-        const content = projectListItems ? (
-          <List>{projectListItems}</List>
-        ) : null;
+)(({ selectedTimelineElement, experiences, handleExperienceClick }) => {
+  const selectedDate = selectedTimelineElement['start-date'];
+  const timelineElements = experiences.map(
+    ({ startDate, endDate, role, company, location }) => {
+      const active = startDate === selectedDate;
+      const label = (
+        <Typography
+          variant={active ? 'h6' : 'subtitle1'}
+        >{`${company} (${location}) - ${role}`}</Typography>
+      );
+      const caption = (
+        <Typography
+          variant={active ? 'subtitle1' : 'subtitle2'}
+          color={active ? 'textPrimary' : 'textSecondary'}
+        >{`${startDate} - ${endDate}`}</Typography>
+      );
+      const projectListItems =
+        active && selectedTimelineElement.projects
+          ? selectedTimelineElement.projects.map(project => (
+              <ListItem key={project.title}>
+                <ListItemText
+                  primary={project.title}
+                  primaryTypographyProps={{ variant: 'body1' }}
+                  secondary={project.description}
+                  secondaryTypographyProps={{ variant: 'body2' }}
+                />
+              </ListItem>
+            ))
+          : null;
+      const content = projectListItems ? <List>{projectListItems}</List> : null;
 
-        return (
-          <Step
-            key={startDate}
-            active={active}
-            completed={false}
-            onClick={() => handleExperienceClick(startDate)}
+      return (
+        <Step
+          key={startDate}
+          active={active}
+          completed={false}
+          onClick={() => handleExperienceClick(startDate)}
+        >
+          <StepLabel
+            StepIconComponent={WorkIcon}
+            StepIconProps={{ active }}
+            optional={caption}
           >
-            <StepLabel
-              StepIconComponent={WorkIcon}
-              StepIconProps={{ active }}
-              optional={caption}
-            >
-              {label}
-            </StepLabel>
-            <StepContent>{content}</StepContent>
-          </Step>
-        );
-      }
-    );
-    return (
-      <Stepper orientation="vertical" nonLinear={true}>
-        {timelineElements}
-      </Stepper>
-    );
-  }
-);
+            {label}
+          </StepLabel>
+          <StepContent>{content}</StepContent>
+        </Step>
+      );
+    }
+  );
+  return (
+    <Stepper orientation="vertical" nonLinear={true}>
+      {timelineElements}
+    </Stepper>
+  );
+});
