@@ -5,16 +5,26 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Hidden
+  Hidden,
+  Tooltip,
+  useTheme
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { Menu, PhoneIphone, Email } from '@material-ui/icons';
+import {
+  Menu,
+  Face,
+  History,
+  Email,
+  PhoneIphone,
+  GitHub
+} from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  contactIcon: {
+  toolbarIcon: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(0.5)
   },
@@ -27,10 +37,14 @@ const mapStateToProps = state => ({ cv: state.cv });
 
 export const Header = connect(mapStateToProps)(({ cv }) => {
   const classes = useStyles();
+  const theme = useTheme();
   return (
-    <AppBar position="sticky">
+    <AppBar
+      position="sticky"
+      color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
+    >
       <Toolbar>
-        <Hidden mdUp>
+        <Hidden smUp>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -43,13 +57,36 @@ export const Header = connect(mapStateToProps)(({ cv }) => {
         <Typography variant="h6" className={classes.title}>
           {cv.name}
         </Typography>
-        <Email fontSize="small" className={classes.contactIcon} />
-        <Hidden smDown>
-          <Typography>{cv.contact.email}</Typography>
-        </Hidden>
-        <PhoneIphone fontSize="small" className={classes.contactIcon} />
-        <Hidden smDown>
-          <Typography>{cv.contact.mobile}</Typography>
+        <Hidden xsDown>
+          <Tooltip title="About Me">
+            <IconButton color="inherit" component={Link} to="/">
+              <Face />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Work History">
+            <IconButton color="inherit" component={Link} to="/timeline">
+              <History />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Email Me">
+            <IconButton color="inherit" href={`mailto:${cv.contact.email}`}>
+              <Email />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={cv.contact.mobile}>
+            <IconButton color="inherit" href={`tel:${cv.contact.email}`}>
+              <PhoneIphone />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="My Github">
+            <IconButton
+              color="inherit"
+              href={cv.contact.github}
+              target="_blank"
+            >
+              <GitHub />
+            </IconButton>
+          </Tooltip>
         </Hidden>
       </Toolbar>
     </AppBar>

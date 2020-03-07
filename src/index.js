@@ -11,8 +11,8 @@ import {
   CircularProgress,
   createMuiTheme
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 import { blue, orange } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
   loaderContainer: {

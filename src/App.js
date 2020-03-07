@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { CssBaseline, Container } from '@material-ui/core';
-import { Header, Timeline } from './components';
+import { Header, Landing, Timeline } from './components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const mapStateToProps = state => ({ ...state });
 
@@ -14,8 +15,17 @@ export const App = connect(mapStateToProps)(({ cv }) => {
     <>
       <CssBaseline />
       <Container maxWidth="md">
-        <Header />
-        <Timeline />
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/" exact={true}>
+              <Landing />
+            </Route>
+            <Route path="/timeline">
+              <Timeline />
+            </Route>
+          </Switch>
+        </Router>
       </Container>
     </>
   );
