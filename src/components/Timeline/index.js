@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Typography,
   Stepper,
@@ -82,6 +82,15 @@ const WorkExperience = props => {
     >{`${startDate} - ${endDate}`}</Typography>
   );
 
+  const ref = React.createRef();
+  useEffect(() => {
+    if (active) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  });
+
   return (
     <Step
       active={active}
@@ -93,6 +102,7 @@ const WorkExperience = props => {
         StepIconComponent={WorkIcon}
         StepIconProps={{ active }}
         optional={caption}
+        ref={ref}
       >
         {label}
       </StepLabel>
