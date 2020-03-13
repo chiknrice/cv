@@ -52,7 +52,10 @@ const LoadableApp = Loadable.Map({
       fetch('cv.yaml')
         .then(response => response.text())
         .then(data => yaml.load(data))
-        .error(e => console.error(e))
+        .catch(e => {
+          console.error(e);
+          throw e;
+        })
   },
   loading: Loading,
   render(loaded, _) {
