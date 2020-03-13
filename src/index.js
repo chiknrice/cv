@@ -5,7 +5,15 @@ import yaml from 'js-yaml';
 import { store, cvActions } from './store';
 import { ThemeProvider } from './components/ThemeProvider';
 import Loadable from 'react-loadable';
-import { CssBaseline, Container, CircularProgress } from '@material-ui/core';
+import {
+  CssBaseline,
+  Container,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Button
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
@@ -19,19 +27,22 @@ const useStyles = makeStyles({
 
 const Loading = ({ error, retry }) => {
   const classes = useStyles();
-  if (error) {
-    return (
-      <div>
-        Error! <button onClick={retry}>Retry</button>
-      </div>
-    );
-  } else {
-    return (
-      <Container className={classes.loaderContainer}>
+  return (
+    <Container className={classes.loaderContainer}>
+      {error ? (
+        <Dialog open={true} onClose={retry}>
+          <DialogContent>Error loading CV</DialogContent>
+          <DialogActions>
+            <Button color="primary" onClick={retry}>
+              Retry
+            </Button>
+          </DialogActions>
+        </Dialog>
+      ) : (
         <CircularProgress />
-      </Container>
-    );
-  }
+      )}
+    </Container>
+  );
 };
 
 const LoadableApp = Loadable.Map({
@@ -41,6 +52,7 @@ const LoadableApp = Loadable.Map({
       fetch('cv.yaml')
         .then(response => response.text())
         .then(data => yaml.load(data))
+        .error(e => console.error(e))
   },
   loading: Loading,
   render(loaded, _) {
