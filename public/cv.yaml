@@ -1,4 +1,4 @@
-name: Adrian Bondoc
+name: Adrian Mari Rayo Bondoc
 
 education:
   - school: Don Bosco Technical College
@@ -13,31 +13,210 @@ address:
   - New Zealand
 
 contact:
-  mobile: '+64225131977'
+  mobile: "+64225131977"
   email: bondoc.amr@gmail.com
-  twitter: '@chiknrice'
+  twitter: "@chiknrice"
   github: https://github.com/chiknrice
 
 summary: >-
-  Adrian is a full-stack developer capable of working on different
-  business domains using industry-standard tools as well as cutting-edge
-  technologies.  He gained most of his professional experience working on
-  payment-related systems, but has also had the opportunity to contribute on
-  the development of a number of mobile application projects and content
-  management systems.  Aside from developing applications, he also enjoys
-  designing and building automated tests and contributing to the open source
-  community.
+  Adrian is a full-stack developer capable of working on different business
+  domains using industry-standard tools as well as cutting-edge technologies. He
+  gained most of his professional experience working on payment-related systems,
+  but has also had the opportunity to contribute on the development of a number
+  of mobile application projects and content management systems.  Aside from
+  developing applications, he also enjoys designing and building automated tests
+  and contributing to the open source community.
+
+skills:
+  - &java Java
+  - &js Javascript
+  - &kt Kotlin
+  - &groovy Groovy
+  - &obj-c Ojbective-C
+  - &go GoLang
+  - &sh Bash
+  - &py Python
+  - &sql SQL
+  - &pl-sql PL/SQL
+
+  - &spring Spring Framework
+  - &spring-boot Spring Boot
+  - &spring-cloud Spring Cloud
+  - &spring-batch Spring Batch
+  - &spring-data Spring Data
+  - &spring-security Spring Security
+  - &spring-webflux Spring Webflux
+  - &spring-ws Spring Web Services
+  - &spring-integration Spring Integration
+  - &spring-test Spring Test
+  - &spring-restdocs Spring REST Docs
+
+  - &react React
+  - &redux Redux
+  - &redux-saga Redux-Saga
+  - &jest Jest
+  - &jquery jQuery
+  - &nodejs NodeJS
+  - &expressjs ExpressJS
+  - &html HTML
+  - &xml XML & XSD
+  - &css CSS/SASS
+  - &json JSON
+  - &yaml YAML
+  - &regex Regex
+  - &velocity Velocity Templates
+  - &jwt JWT
+
+  - &rest REST Web Service
+  - &soap SOAP
+  - &jaxrs JAX-RS
+  - &jaxws JAX-WS
+  - &jaxb JAXB
+  - &swagger Swagger
+
+  - &rabbitmq RabbitMQ (AMQP)
+  - &struts Struts
+  - &servlets Servlets
+  - &jsp JSP
+  - &jsf JSF
+  - &ejb EJB
+  - &jpa JPA
+  - &jmx JMX
+  - &jms JMS
+  - &vaadin Vaadin
+
+  - &mina Apache MINA
+  - &nio Java NIO
+  - &ssh SSH/SCP/SFTP
+  - &telnet Telnet
+
+  - &httpd Apache HTTP
+  - &tomcat Apache Tomcat & TomEE
+  - &weblogic Weblogic
+  - &websphere Websphere
+  - &jboss JBoss
+  - &glassfish Glassfish
+  - &mobilefirst MobileFirst
+
+  - &hibernate Hibernate
+  - &oracle Oracle DB
+  - &postgres PostgreSQL
+  - &mongo Mongo DB
+  - &sybase Sybase
+  - &mssql MS SQL
+  - &hsql HSQL DB
+  - &liquibase Liquibase
+  - &flyway Flyway
+  - &robomongo RoboMongo
+  - &navicat Navicat
+  - &toad Toad
+
+  - &junit JUnit
+  - &mockito Mockito
+  - &testng TestNG
+  - &wiremock WireMock
+  - &geb Geb
+  - &spock Spock
+  - &concordion Concordion
+  - &selenium Selenium
+  - &cucumber Cucumber
+  - &soapui SoapUI
+  - &postman Postman
+  - &jmeter JMeter
+  - &dbunit DB Unit
+
+  - &jpda JPDA
+  - &jprofiler JProfiler
+  - &beyond-compar
+
+  - &loggers Logback/Log4j/slf4j
+
+  - &ant Ant
+  - &maven Maven
+  - &gradle Gradle
+
+  - &jenkins Jenkins
+  - &jenkins-pipeline Jenkins Pipeline
+  - &docker Docker
+  - &docker-swarm Docker Swarm
+  - &ansible Ansible
+  - &openshift Openshift
+  - &vault Vault
+  - &travisci TravisCI
+  - &artifactory Artifactory
+  - &nexus Nexus
+  - &vagrant Vagrant
+  - &vmware VMWare
+  - &virtual-box VirtualBox
+
+  - &eclipse Eclipse
+  - &intellij IntelliJ
+  - &xcode Xcode
+  - &vscode VS Code
+  - &vs Visual Studio
+  - &ryder Ryder
+  - &vi Vi/Vim
+
+  - &cvs CVS
+  - &svn SVN
+  - &git Git
+  - &bitbucket Bitbucket
+  - &github Github
+  - &tortoise Tortoise
+
+  - &jira JIRA
+  - &confluence Confluence
+  - &mantis Mantis
+  - &test-director Test Director
+
+  - &agile Agile
+  - &waterfall Waterfall
+
+  - &uml UML
+  - &visio Visio
+  - &balsamiq Balsamiq Mockups
+
+  - &qlikview QlikView
+  - &jasper-reports Jasper Reports
+  - &crystal-reports Crystal Reports
+
+  - &windows Windows
+  - &linux Linux
+  - &macos Mac OS
 
 experience:
   - start-date: 30/07/2019
     role: Software Developer
     company: Westpac
+    team: TODO
     location: New Zealand
+    skills:
+      - *js
+      - *react
+      - *redux
+      - *redux-saga
+      - *jest
+      - *java
+      - *servlets
+      - *spring-boot
+      - *spring-webflux
+      - *mobilefirst
+      - *websphere
+      - *rest
+      - *windows
+      - *linux
+      - *maven
+      - *git
+      - *confluence
+      - *bitbucket
+      - *jira
+
     projects:
       - title: WestpacONE Enhancements
         description: >-
           Implemented new features and enhancements to the internet banking
           application.
+        tech:
       - title: Tandem Authentication Migration
         description: >-
           Implemented changes to allow for moving authentication of customers
@@ -49,7 +228,25 @@ experience:
     end-date: 29/07/2019
     role: Software Developer
     company: ANZ
+    team: CSP
     location: New Zealand
+    skills:
+      - *openshift
+      - *spring-boot
+      - *rest
+      - *swagger
+      - *postman
+      - *oracle
+      - *flyway
+      - *maven
+      - *rest
+      - *hibernate
+      - *linux
+      - *windows
+      - *jenkins
+      - *jenkins-pipeline
+      - *git
+
     projects:
       - title: Canary Deployments
         description: >-
@@ -70,7 +267,30 @@ experience:
     end-date: 15/02/2019
     role: Software Developer
     company: ANZ
+    team: TODO
     location: New Zealand
+    skills:
+      - *java
+      - *spring
+      - *ant
+      - *gradle
+      - *sh
+      - *py
+      - *struts
+      - *vaadin
+      - *jwt
+      - *groovy
+      - *geb
+      - *spock
+      - *docker
+      - *docker-swarm
+      - *jenkins
+      - *jenkins-pipeline
+      - *ansible
+      - *ejb
+      - *hibernate
+      - *git
+
     projects:
       - title: ADO
         description: >-
@@ -94,46 +314,194 @@ experience:
           docker files and configuration as code plugin.
       - title: Jenkins Delivery Pipeline
         description: >-
-          Integrated a number of individual parameterised jobs which was used
-          to build/test, release, and deploy the application’s binaries to a
-          streamlined multi-branch build pipeline with additional features
-          such as docker build slaves, docker image builds, and deploying
-          stacks to docker swarm for each tester.
+          Integrated a number of individual parameterised jobs which was used to
+          build/test, release, and deploy the application’s binaries to a
+          streamlined multi-branch build pipeline with additional features such
+          as docker build slaves, docker image builds, and deploying stacks to
+          docker swarm for each tester.
       - title: SVN to Git Migration
         description: >-
           Helped with moving sources from SVN to Git.  Implemented a branching
-          strategy which allowed the team to work on features independently,
-          and integrated code reviews via pull request workflow.
+          strategy which allowed the team to work on features independently, and
+          integrated code reviews via pull request workflow.
       - title: Ant to Gradle Migration
         description: >-
           Switched the Ant with shell scripts build solution to Gradle which
-          drastically shortened build time, reduced source repository size,
-          and improved maintainability. This also lessen the effort for new
+          drastically shortened build time, reduced source repository size, and
+          improved maintainability. This also lessen the effort for new
           developers to start working on ADO.
       - title: Perimeter Security
         description: >-
-          Implemented a pre-authentication server which authenticates users
-          and issues temporary access tokens (JWT) that allows authenticated
-          users to gain a secure session with the ADO web application.  Secure
+          Implemented a pre-authentication server which authenticates users and
+          issues temporary access tokens (JWT) that allows authenticated users
+          to gain a secure session with the ADO web application.  Secure
           sessions were also implemented using JWT.
 
-  - start-date: 23/07/2014
+  - start-date: 04/04/2016
     end-date: 02/06/2017
     role: Java Developer
     company: Verifone/Eftpos
+    team: BAU
     location: New Zealand
+
+    projects:
+      - title: Configuration Server
+        description: >-
+          Implemented changes to the Verifone switch to use spring-boot and
+          spring-cloud-config to be able to externalize all configuration to a
+          git repository where changes can be audited and organized to support
+          different test environments.  The changes provided a way to streamline
+          delivery and change propagation.
+      - title: File Exchange Server
+        description: >-
+          Implemented a central file exchange server responsible for
+          transferring critical files (e.g. settlement and reconciliation files)
+          between different systems.
+      - title: Batch File Processing
+        description: >-
+          Implemented batch importing of payment card BIN (Bank Identification
+          Number) information which is regularly submitted by banks.
+      - title: Testing Support
+        description: >-
+          Ceated Concordion tests and implemented test fixtures for testers.
+      - title: Manila Team Up Skill
+        description: >-
+          Conducted a 3-month training and mentoring for a new team in Manila
+          comprising of 5 developers and 4 testers.
+
+  - start-date: 02/06/2015
+    end-date: 01/04/2016
+    role: Java Developer
+    company: Verifone/Eftpos
+    team: TPA
+    location: New Zealand
+
+    projects:
+      - title: TPA Integration
+        description: >-
+          Integrated Verifone's payment switch to TPAs (third party aggregators)
+          allowing them to migrate from a ANZ to Verifone.  The TPA originating
+          traffic constitutes a large proportion of Verifone’s overall NZ
+          traffic.
+      - title: TPA Reports
+        description: >-
+          Implemented transaction report generation, including reconciliation
+          files and transaction summary for the TPAs.
+
+  - start-date: 17/11/2014
+    end-date: 29/05/2015
+    role: Java Developer
+    company: Verifone/Eftpos
+    team: Online
+    location: New Zealand
+
+    projects:
+      - title: EFTEX Integration
+        description: >-
+          Integrated Verifone's payment switch to EFTEX gateway to process
+          foreign currency transactions.  The project allows terminals to offer
+          DCC (Dynamic Currency Conversion) at the point of sale.
+      - title: Global Blue Integration
+        description: >-
+          Integrated Verifone's payment switch to Global Blue foreign exchange
+          APIs to allow Verifone terminals to offer different currencies at
+          point of sale.
+      - title: UPI Integration
+        description: >-
+          Integrated Verifone's payment switch to UPI (Unionpay) gateway to
+          allow Verifone to process payments initiated by UPI based cards.
+
+  - start-date: 23/07/2014
+    end-date: 14/11/2014
+    role: Java Developer
+    company: Verifone/Eftpos
+    team: Gateway Platform
+    location: New Zealand
+
+    projects:
+      - title: Merchant and Terminal Onboarding System
+        description: >-
+          Implemented the system which orchestrates all activities necessary to
+          onboard a payment terminals to be used with Verifone's payment
+          switch.  Developed APIs to allow the acquiring banks to onboard
+          terminals and manage merchant information needed by the payment
+          gateway.  Activities orchestrated by the system includes terminal
+          activation and delivery, notification of onboarding status to
+          acquiring banks, as well as pushing terminal and merchant information
+          to the payment gateway.
 
   - start-date: 03/09/2012
     end-date: 15/10/2014
     role: Line Manager / Technical Lead
     company: iScale Solutions
-    location: Singapore
+    team: Merchant Portal
+    location: Philippines
+
+    projects:
+      - title: Merchant Portal
+        description: >-
+          Implemented the web application where merchants can manage their
+          loyalty and promotional campaigns.  Provided the technical design and
+          mentoring to the Java developers as well as the Oracle developers
+          based in Singapore.  Provided automated tests and mentoring to the
+          testers on the aspect of automating tests and SVP.
+      - title: Customer Portal
+        description: >-
+          Implemented the web application allowing customers/card holders to
+          manage their points/coupons/vouchers and claim their rewards through
+          the site’s fulfilment facility.  Provided the initial technical design
+          and training to developers implementing the application.
+      - title: OmniConnect (iOS)
+        description: >-
+          Implemented an iOS app which allows customers to receive push
+          notifications with relevant smart messages when they approach beacons
+          or a certain locations.
+      - title: Customer Portal Android SDK and Facebook Integration
+        description: >-
+          Implemented a POC which allows Facebook users to register and
+          authenticate in Customer Portal.  Performed initial R&D of an Android
+          SDK to allow smart phones to communicate with the Customer Portal.
+      - title: Singapore Team Support
+        description: >-
+          Provided design and POCs for different Singapore based teams.
 
   - start-date: 14/03/2012
     end-date: 31/08/2012
     role: Technical Lead
     company: iScale Solutions
-    location: Singapore
+    team: Merchant Portal
+    location: Philippines
+
+    projects:
+      - title: Manila Team Up Setup
+        description: >-
+          Performed recruitment and other employee onboarding processes to build
+          a development team comprising of 6 developers and 4 testers. Provided
+          initial domain knowledge training to all developers and testers.  Set
+          up development environment including test servers, CI server,
+          (file/print/scan) server, and coordinated with Singapore team for all
+          necessary access.
+      - title: Merchant Portal UX Design
+        description: >-
+          Contributed to the UX design of the company’s first publicly
+          accessible web application, Merchant Portal, providing inputs to
+          business analysts to enhance usability.
+      - title: Merchant Portal Technical Design
+        description: >-
+          Provided technical design of Merchant Portal including schema design,
+          web UI strategy, localization, transaction strategy, caching strategy,
+          data modeling, web security, clustering strategy (for scalability),
+          framework choices, code structure and conventions, performance
+          considerations, SVP test strategies as well as build and configuration
+          management.  Provided a reference implementation of Merchant Portal as
+          guide for developers on the technical design and code conventions.
+      - title: Singapore Team Training
+        description: >-
+          Provided to Singapore based engineers on technical design of Merchant
+          Portal.
+      - title: On Site Support
+        description: >-
+          Provided on-site client support for another projects.
 
   - start-date: 31/10/2011
     end-date: 13/03/2012
