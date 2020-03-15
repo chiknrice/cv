@@ -2,21 +2,32 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const cvSlice = createSlice({
   name: 'cv',
-  initialState: { loading: true },
+  initialState: {},
   reducers: {
-    setCv: (_, action) => ({ ...action.payload, loading: false })
+    setCv: (_, action) => action.payload
   }
 });
 
 const uiSlice = createSlice({
   name: 'ui',
   initialState: {
+    status: 'not-loaded',
     themeOptions: {
       paletteType: 'light'
     },
     selectedDate: 'first'
   },
   reducers: {
+    fetchAppRequested: state => {
+      state.status = 'loading';
+    },
+    fetchAppSuccess: state => {
+      state.status = 'loaded';
+    },
+    fetchAppFailed: (state, action) => {
+      state.status = 'error';
+      state.error = action.payload;
+    },
     togglePaletteType: state => {
       state.themeOptions.paletteType =
         state.themeOptions.paletteType === 'light' ? 'dark' : 'light';

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { connect, Provider, useDispatch } from 'react-redux';
 import yaml from 'js-yaml';
-import { store, cvActions } from './store';
+import { store, cvActions, uiActions } from './store';
 import { ThemeProvider } from './components/ThemeProvider';
-import Loadable from 'react-loadable';
 import {
   CssBaseline,
   Container,
@@ -25,42 +24,61 @@ const useStyles = makeStyles({
   }
 });
 
-const Loading = ({ error, retry }) => {
-  const classes = useStyles();
-  return (
-    <Container className={classes.loaderContainer}>
-      {error ? (
-        <Dialog open={true} onClose={retry}>
-          <DialogContent>Error loading CV</DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={retry}>
-              Retry
-            </Button>
-          </DialogActions>
-        </Dialog>
-      ) : (
-        <CircularProgress />
-      )}
-    </Container>
-  );
+const mapStateToProps = state => ({ ...state });
+
+const loadApp = setApp => {
+  const { setCv } = cvActions;
+  const { fetchAppRequested, fetchAppSuccess, fetchAppFailed } = uiActions;
+  return dispatch => {
+    dispatch(fetchAppRequested());
+    fetch('cv.yaml')
+      .then(response => response.text())
+      .then(data => yaml.load(data))
+      .then(loadedCv => {
+        dispatch(setCv(loadedCv));
+        return import('./App');
+      })
+      .then(module => {
+        setApp({ component: module.App });
+        dispatch(fetchAppSuccess());
+      })
+      .catch(e => {
+        dispatch(fetchAppFailed(e.message));
+      });
+  };
 };
 
-const LoadableApp = Loadable.Map({
-  loader: {
-    module: () => import('./App'),
-    cv: () =>
-      fetch('cv.yaml')
-        .then(response => response.text())
-        .then(data => yaml.load(data))
-        .catch(e => {
-          console.error(e);
-          throw e;
-        })
-  },
-  loading: Loading,
-  render(loaded, _) {
-    store.dispatch(cvActions.setCv(loaded.cv));
-    return <loaded.module.App />;
+const LoadableApp = connect(mapStateToProps)(({ cv, ui }) => {
+  const dispatch = useDispatch();
+  const [LoadedApp, setLoadedApp] = useState(null);
+  const classes = useStyles();
+
+  if (ui.status === 'not-loaded') {
+    dispatch(loadApp(setLoadedApp));
+  }
+
+  if (ui.status === 'loaded') {
+    return <LoadedApp.component />;
+  } else if (ui.status === 'error') {
+    return (
+      <Dialog open={true}>
+        <DialogContent>{ui.error}</DialogContent>
+        <DialogActions>
+          <Button
+            color="primary"
+            onClick={() => dispatch(loadApp(setLoadedApp))}
+          >
+            Retry
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  } else {
+    return (
+      <Container className={classes.loaderContainer}>
+        <CircularProgress />
+      </Container>
+    );
   }
 });
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Container } from '@material-ui/core';
 import { Header, Landing, Timeline } from './components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -16,12 +15,7 @@ const useStyles = makeStyles({
   }
 });
 
-const mapStateToProps = state => ({ ...state });
-
-export const App = connect(mapStateToProps)(({ cv }) => {
-  if (cv.loading) {
-    throw new Error('App can only be rendered with a loaded cv');
-  }
+export const App = () => {
   const classes = useStyles();
   return (
     <Container maxWidth="md" className={classes.container} disableGutters>
@@ -38,4 +32,4 @@ export const App = connect(mapStateToProps)(({ cv }) => {
       </Router>
     </Container>
   );
-});
+};
