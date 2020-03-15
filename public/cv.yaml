@@ -18,14 +18,17 @@ contact:
   twitter: "@chiknrice"
   github: https://github.com/chiknrice
 
-summary: >-
-  Adrian is a full-stack developer capable of working on different business
-  domains using industry-standard tools as well as cutting-edge technologies. He
-  gained most of his professional experience working on payment-related systems,
-  but has also had the opportunity to contribute on the development of a number
-  of mobile application projects and content management systems.  Aside from
-  developing applications, he also enjoys designing and building automated tests
-  and contributing to the open source community.
+summary:
+  - >-
+    Adrian is a full-stack developer capable of working on different business
+    domains using industry-standard tools as well as cutting-edge technologies.
+    He gained most of his professional experience working on payment-related
+    systems, but has also had the opportunity to contribute on the development
+    of several web based applications as well as native mobile application
+    projects.
+  - >-
+    Aside from developing applications, he also enjoys designing and building
+    automated tests and contributing to the open source community.
 
 skills:
   - &java Java
@@ -634,7 +637,8 @@ experience:
         description:
           - "Integrated the SMS routing platform using XMPP or web services with
             the following telecoms providers:"
-          - ul: |-
+          - type: ul
+            text: |-
               Indonesia (Telkomsel, Satelindo, IM3, and XLCom)
               Malaysia (Celcom, Digi, and Maxis)
               Philippines (Globe)
@@ -644,7 +648,8 @@ experience:
       - title: Interactive Messaging and Content Delivery Applications
         description:
           - "Developed SMS applications for the following projects/clients:"
-          - ul: |-
+          - type: ul
+            text: |-
               SMS Kreatif
               Openbit
               KikuMobile

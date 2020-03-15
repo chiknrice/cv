@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { uiActions } from '../../store';
 import { makeStyles } from '@material-ui/styles';
+import { RichText } from '../RichText';
 
 const useStyles = makeStyles({
   timeline: {
@@ -111,50 +112,20 @@ const WorkExperience = props => {
   );
 };
 
-const RichText = ({ ul }) => {
-  if (ul) {
-    const lines = ul.split(/[\r\n]+/);
-    const items = lines.map(line => <li>{line}</li>);
-    return <ul>{items}</ul>;
-  } else {
-    return <span>Unknown Formatting</span>;
-  }
-};
-
-const FormattableText = ({ text, variant, color }) =>
-  Array.isArray(text) ? (
-    text.map((element, index) =>
-      typeof element === 'string' ? (
-        <Typography
-          key={index}
-          variant={variant}
-          color={color}
-          component="span"
-        >
-          {element}
-        </Typography>
-      ) : (
-        <RichText {...element} />
-      )
-    )
-  ) : (
-    <Typography variant={variant} color={color}>
-      {text}
-    </Typography>
-  );
-
 const Projects = ({ projects }) => {
   const projectListItems = projects.map(project => (
     <ListItem key={project.title}>
       <ListItemText
-        primary={project.title}
-        primaryTypographyProps={{ variant: 'body1' }}
+        disableTypography={true}
+        primary={<Typography variant="body1">{project.title}</Typography>}
         secondary={
-          <FormattableText
-            text={project.description}
-            variant="body2"
-            color="textSecondary"
-          />
+          <>
+            <RichText
+              text={project.description}
+              variant="body2"
+              color="textSecondary"
+            />
+          </>
         }
       />
     </ListItem>

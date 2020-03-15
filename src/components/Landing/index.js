@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Paper, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { RichText } from '../RichText';
 
 const useStyles = makeStyles({
   topMargin: {
@@ -26,13 +27,12 @@ export const Landing = connect(mapStateToProps)(({ summary }) => {
       <Container className={classes.topPadding}>
         <Typography variant="h4">Qualification Summary</Typography>
         <Divider className={classes.topMargin} />
-        <Typography
+        <RichText
+          text={summary}
           variant="body1"
           className={classes.topMargin}
           align="justify"
-        >
-          {summary}
-        </Typography>
+        />
       </Container>
     </Paper>
   );
