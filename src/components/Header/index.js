@@ -63,7 +63,7 @@ export const Header = connect(
             <Menu />
           </IconButton>
         </Hidden>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h5" className={classes.title}>
           {cv.name}
         </Typography>
         <Hidden xsDown>

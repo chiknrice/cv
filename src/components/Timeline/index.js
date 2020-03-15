@@ -117,8 +117,11 @@ const Projects = ({ projects }) => {
       <ListItemText
         primary={project.title}
         primaryTypographyProps={{ variant: 'body1' }}
-        secondary={project.description}
-        secondaryTypographyProps={{ variant: 'body2' }}
+        secondary={
+          <Typography variant="body2" noWrap>
+            {project.description}
+          </Typography>
+        }
       />
     </ListItem>
   ));
