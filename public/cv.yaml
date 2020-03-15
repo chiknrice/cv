@@ -185,7 +185,7 @@ skills:
   - &macos Mac OS
 
 experience:
-  - start-date: 30/07/2019
+  - start-date: 30-07-2019
     role: Software Developer
     company: Westpac
     team: TODO
@@ -224,8 +224,8 @@ experience:
           project aims to address performance-related issues caused by high
           volume of authentication traffic going to Tandem during peak season.
 
-  - start-date: 18/02/2019
-    end-date: 29/07/2019
+  - start-date: 18-02-2019
+    end-date: 29-07-2019
     role: Software Developer
     company: ANZ
     team: CSP
@@ -263,8 +263,8 @@ experience:
           multi-authoriser payments initiated by Internet Banking and GoMoney
           mobile application.
 
-  - start-date: 05/06/2017
-    end-date: 15/02/2019
+  - start-date: 05-06-2017
+    end-date: 15-02-2019
     role: Software Developer
     company: ANZ
     team: TODO
@@ -337,8 +337,8 @@ experience:
           to gain a secure session with the ADO web application.  Secure
           sessions were also implemented using JWT.
 
-  - start-date: 04/04/2016
-    end-date: 02/06/2017
+  - start-date: 04-04-2016
+    end-date: 02-06-2017
     role: Java Developer
     company: Verifone/Eftpos
     team: BAU
@@ -369,8 +369,8 @@ experience:
           Conducted a 3-month training and mentoring for a new team in Manila
           comprising of 5 developers and 4 testers.
 
-  - start-date: 02/06/2015
-    end-date: 01/04/2016
+  - start-date: 02-06-2015
+    end-date: 01-04-2016
     role: Java Developer
     company: Verifone/Eftpos
     team: TPA
@@ -388,8 +388,8 @@ experience:
           Implemented transaction report generation, including reconciliation
           files and transaction summary for the TPAs.
 
-  - start-date: 17/11/2014
-    end-date: 29/05/2015
+  - start-date: 17-11-2014
+    end-date: 29-05-2015
     role: Java Developer
     company: Verifone/Eftpos
     team: Online
@@ -411,8 +411,8 @@ experience:
           Integrated Verifone's payment switch to UPI (Unionpay) gateway to
           allow Verifone to process payments initiated by UPI based cards.
 
-  - start-date: 23/07/2014
-    end-date: 14/11/2014
+  - start-date: 23-07-2014
+    end-date: 14-11-2014
     role: Java Developer
     company: Verifone/Eftpos
     team: Gateway Platform
@@ -430,8 +430,8 @@ experience:
           acquiring banks, as well as pushing terminal and merchant information
           to the payment gateway.
 
-  - start-date: 03/09/2012
-    end-date: 15/10/2014
+  - start-date: 03-09-2012
+    end-date: 15-10-2014
     role: Line Manager / Technical Lead
     company: iScale Solutions
     team: Merchant Portal
@@ -465,8 +465,8 @@ experience:
         description: >-
           Provided design and POCs for different Singapore based teams.
 
-  - start-date: 14/03/2012
-    end-date: 31/08/2012
+  - start-date: 14-03-2012
+    end-date: 31-08-2012
     role: Technical Lead
     company: iScale Solutions
     team: Merchant Portal
@@ -503,44 +503,184 @@ experience:
         description: >-
           Provided on-site client support for another projects.
 
-  - start-date: 31/10/2011
-    end-date: 13/03/2012
+  - start-date: 31-10-2011
+    end-date: 13-03-2012
     role: Senior Java & Oracle Developer
     company: New Edge Financial
+    team: TODO
     location: Singapore
 
-  - start-date: 17/11/2007
-    end-date: 25/10/2011
+    projects:
+      - title: Fimatrix Customization
+        description: >-
+          Created and customized web modules of the company’s risk platform
+          (Fimatrix).
+      - title: RiskSSO Integration
+        description: >-
+          Integrated Fimatrix to the company’s single sign-on facility (RiskSSO)
+          to allow users to use their SSO credentials on the company’s risk
+          platform (Fimatrix).
+
+  - start-date: 17-11-2007
+    end-date: 25-10-2011
     role: Product Development Engineer
     company: Welcome Real-Time
+    team: Product Development
     location: Singapore
 
-  - start-date: 12/03/2007
-    end-date: 14/11/2008
+    projects:
+      - title: Catalogue Redemption Module
+        description: >-
+          Implemented the component which allows the card holders of BPI
+          (Philippines) to redeem their rewards through an online catalog.
+      - title: BPI Data Migration
+        description: >-
+          Designed the required DB schema for the BPI project and documented a
+          migration plan for legacy production data to be migrated to the new DB
+          schema.
+      - title: QlikView Flexible Reports
+        description: >-
+          Implemented configurable reports based on QlikView, a Business
+          Intelligence Tool.  Designed complex DB views which extracts and
+          transforms data for reporting.
+      - title: QlikView Server Integration
+        description: >-
+          Integrated QlikView server (which serves QlikView reports) with the
+          company’s loyalty platform.
+      - title: XML Export Module
+        description: >-
+          Implemented an export module for extracting transactions from the
+          company’s loyalty system which is required by clients for their own
+          reporting/data analysis.  The module involves creating PL/SQL packages
+          containing complex queries and using JPublisher to extract data to be
+          available via JAX-WS & JAXB based web services.
+      - title: Bank-wide Loyalty Campaign Engine
+        description: >-
+          Implemented a new campaign engine which applies to all merchants
+          associated with a bank (formerly campaigns were associated to
+          merchants only).  The campaign engine was implemented in PL/SQL and
+          was a core feature of the latest version of the company’s loyalty
+          platform.
+      - title: Enhanced Scheduler
+        description: >-
+          Implemented a new scheduler for the company’s loyalty platform which
+          is capable of managing distributed tasks (e.g. reports, data export)
+          and provide notification.
+      - title: Communications Server
+        description: >-
+          Implemented the communication server which allows terminals to
+          communicate with the loyalty platform’s campaign engine.  Facilitated
+          SVP testing to identify performance issues and carried out tuning with
+          the help tools such as JProfiler.
+      - title: Data Source Management
+        description: >-
+          Implemented a more reliable data source management framework to
+          address the loyalty platform’s numerous DB connection related issues,
+          adding features such as failover and diagnostic tools for identifying
+          connection leaks.
+      - title: JPublisher Framework
+        description: >-
+          Created a framework utilizing core Java APIs to allow developers to
+          easily implement JPublisher-based services.
+      - title: Code Generators
+        description: >-
+          Developed code generators to creating required java classes when
+          customizing the company’s loyalty platform.
+      - title: SVP Test Tools
+        description: >-
+          Developed test tools used to test the company’s communication server,
+          web services, and file processing modules.
+      - title: Development Process Improvement
+        description: >-
+          Standardized development environment and build-release processes.
+      - title: Mavenized Projects
+        description: >-
+          Setup and configured a company-wide maven repository (Artifactory) and
+          centralized artifact management.  Converted projects to use maven as
+          the standard build/dependency management tool.  Developed maven
+          plug-ins to address customized build requirements.
+
+  - start-date: 12-03-2007
+    end-date: 14-11-2008
     role: Maintenance Development Engineer
     company: Welcome Real-Time
+    team: Project/Maintenance Services
     location: Singapore
 
-  - start-date: 01/02/2006
-    end-date: 09/03/2007
+    projects:
+      - title: Loyalty Platform Customisations
+        description: >-
+          Implemented customisations of the company’s web based loyalty platform
+          for different clients/banks.
+      - title: Production Technical Support
+        description: >-
+          Performed analysis and investigation of both Java and PL/SQL issues in
+          production environment and developed fixes as well as data patches.
+          Cconsolidated fixes for production issues into release packages and
+          performed production deployment.
+
+  - start-date: 01-02-2006
+    end-date: 09-03-2007
     role: Senior Software Developer
     company: iPop Networks
     location: Singapore
 
-  - start-date: 05/09/2005
-    end-date: 03/02/2006
+    projects:
+      - title: BMX2 (SMS Routing and Billing Platform)
+        description: >-
+          Implemented a platform which allows SMS application providers to
+          easily integrate with telecommunications providers.
+      - title: Telecoms Integration
+        description: |-
+          Integrated the SMS routing platform using XMPP or web services with
+          the following telecoms providers:
+            * Indonesia (Telkomsel, Satelindo, IM3, and XLCom)
+            * Malaysia (Celcom, Digi, and Maxis)
+            * Philippines (Globe)
+            * Vietname (Viettel, Mobifone, and Vinaphone)
+            * India (IMI Mobile)
+            * Taiwan (Taiwan Cellular)
+      - title: Interactive Messaging and Content Delivery Applications
+        description: |-
+          Developed SMS applications for the following projects/clients:
+            * SMS Kreatif
+            * Openbit
+            * KikuMobile
+            * DadaMobile
+            * Emexus
+            * ACME Mobile
+            * Mobile Fun 4 U
+            * ESPN World Cup (Bridge – Neustar)
+            * Yahoo FIFA
+            * MTV Asia Awards
+            * Agile Mobile
+            * Astro TV
+      - title: 123 MultiMedia Contents Porting
+        description: >-
+          Ported applications and connectivity from the company’s BMX1 to BMX2
+          platform.
+      - title: HTTP Connection Framework
+        description: >-
+          Developed a framework which enabled faster integration with telecom
+          providers and SMS application providers.
+      - title: Technical Support
+        description: >-
+          Provided production support for most of the projects handled.
+
+  - start-date: 05-09-2005
+    end-date: 03-02-2006
     role: Software Engineer
     company: GXS
     location: Philippines
 
-  - start-date: 25/01/2005
-    end-date: 02/09/2005
+  - start-date: 25-01-2005
+    end-date: 02-09-2005
     role: Software Engineer
     company: Standfirst Mobile
     location: Philippines
 
-  - start-date: 08/03/2004
-    end-date: 31/12/2004
+  - start-date: 08-03-2004
+    end-date: 31-12-2004
     role: Systems Administrator / Java Developer
     company: TinCan Mobile
     location: Philippines
