@@ -631,30 +631,32 @@ experience:
           Implemented a platform which allows SMS application providers to
           easily integrate with telecommunications providers.
       - title: Telecoms Integration
-        description: |-
-          Integrated the SMS routing platform using XMPP or web services with
-          the following telecoms providers:
-            * Indonesia (Telkomsel, Satelindo, IM3, and XLCom)
-            * Malaysia (Celcom, Digi, and Maxis)
-            * Philippines (Globe)
-            * Vietname (Viettel, Mobifone, and Vinaphone)
-            * India (IMI Mobile)
-            * Taiwan (Taiwan Cellular)
+        description:
+          - "Integrated the SMS routing platform using XMPP or web services with
+            the following telecoms providers:"
+          - ul: |-
+              Indonesia (Telkomsel, Satelindo, IM3, and XLCom)
+              Malaysia (Celcom, Digi, and Maxis)
+              Philippines (Globe)
+              Vietname (Viettel, Mobifone, and Vinaphone)
+              India (IMI Mobile)
+              Taiwan (Taiwan Cellular)
       - title: Interactive Messaging and Content Delivery Applications
-        description: |-
-          Developed SMS applications for the following projects/clients:
-            * SMS Kreatif
-            * Openbit
-            * KikuMobile
-            * DadaMobile
-            * Emexus
-            * ACME Mobile
-            * Mobile Fun 4 U
-            * ESPN World Cup (Bridge – Neustar)
-            * Yahoo FIFA
-            * MTV Asia Awards
-            * Agile Mobile
-            * Astro TV
+        description:
+          - "Developed SMS applications for the following projects/clients:"
+          - ul: |-
+              SMS Kreatif
+              Openbit
+              KikuMobile
+              DadaMobile
+              Emexus
+              ACME Mobile
+              Mobile Fun 4 U
+              ESPN World Cup (Bridge – Neustar)
+              Yahoo FIFA
+              MTV Asia Awards
+              Agile Mobile
+              Astro TV
       - title: 123 MultiMedia Contents Porting
         description: >-
           Ported applications and connectivity from the company’s BMX1 to BMX2

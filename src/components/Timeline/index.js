@@ -111,6 +111,38 @@ const WorkExperience = props => {
   );
 };
 
+const RichText = ({ ul }) => {
+  if (ul) {
+    const lines = ul.split(/[\r\n]+/);
+    const items = lines.map(line => <li>{line}</li>);
+    return <ul>{items}</ul>;
+  } else {
+    return <span>Unknown Formatting</span>;
+  }
+};
+
+const FormattableText = ({ text, variant, color }) =>
+  Array.isArray(text) ? (
+    text.map((element, index) =>
+      typeof element === 'string' ? (
+        <Typography
+          key={index}
+          variant={variant}
+          color={color}
+          component="span"
+        >
+          {element}
+        </Typography>
+      ) : (
+        <RichText {...element} />
+      )
+    )
+  ) : (
+    <Typography variant={variant} color={color}>
+      {text}
+    </Typography>
+  );
+
 const Projects = ({ projects }) => {
   const projectListItems = projects.map(project => (
     <ListItem key={project.title}>
@@ -118,9 +150,11 @@ const Projects = ({ projects }) => {
         primary={project.title}
         primaryTypographyProps={{ variant: 'body1' }}
         secondary={
-          <Typography variant="body2" noWrap>
-            {project.description}
-          </Typography>
+          <FormattableText
+            text={project.description}
+            variant="body2"
+            color="textSecondary"
+          />
         }
       />
     </ListItem>
