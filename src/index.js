@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider, useDispatch } from 'react-redux';
 import yaml from 'js-yaml';
-import { store, cvActions, uiActions } from './store';
-import { ThemeProvider } from './components/ThemeProvider';
+import { store, cvActions, uiActions } from 'store';
+import { ThemeProvider } from 'components';
 import {
   CssBaseline,
   Container,

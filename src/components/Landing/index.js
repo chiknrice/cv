@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Paper, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { RichText } from '../RichText';
+import { RichText } from 'components';
 
 const useStyles = makeStyles({
   topMargin: {

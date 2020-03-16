@@ -12,9 +12,9 @@ import {
 import { Work } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
-import { uiActions } from '../../store';
 import { makeStyles } from '@material-ui/styles';
-import { RichText } from '../RichText';
+import { uiActions } from 'store';
+import { RichText } from 'components';
 
 const useStyles = makeStyles({
   timeline: {

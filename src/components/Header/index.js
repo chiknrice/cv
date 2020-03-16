@@ -21,7 +21,7 @@ import {
   Brightness5
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { uiActions } from '../../store';
+import { uiActions } from 'store';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
