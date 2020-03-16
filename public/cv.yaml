@@ -270,7 +270,7 @@ experience:
     end-date: 2019-02-15
     role: Software Developer
     company: ANZ
-    team: TODO
+    team: Business Owners
     location: New Zealand
     skills:
       - *java
@@ -424,14 +424,14 @@ experience:
     projects:
       - title: Merchant and Terminal Onboarding System
         description: >-
-          Implemented the system which orchestrates all activities necessary to
-          onboard a payment terminals to be used with Verifone's payment
-          switch.  Developed APIs to allow the acquiring banks to onboard
+          Implemented an event driven system which orchestrates all activities
+          necessary to onboard a payment terminals to be used with Verifone's
+          payment switch.  Activities includes terminal activation and delivery,
+          notification of onboarding status to acquiring banks, as well as
+          publishing terminal and merchant information to the payment
+          gateway.  APIs were developed to allow the acquiring banks to onboard
           terminals and manage merchant information needed by the payment
-          gateway.  Activities orchestrated by the system includes terminal
-          activation and delivery, notification of onboarding status to
-          acquiring banks, as well as pushing terminal and merchant information
-          to the payment gateway.
+          gateway.
 
   - start-date: 2012-09-03
     end-date: 2014-10-15
@@ -680,14 +680,94 @@ experience:
     company: GXS
     location: Philippines
 
+    projects:
+      - title: IPCnet (Subway Company)
+        description: >-
+          Implemented components for the system which assist IPC (Independent
+          Purchasing Cooperative) in electronically tracking food products
+          throughout the entire distribution process, ensuring that only the
+          highest quality products reach SUBWAY® franchisees and ultimately the
+          consumer.  Performed testing and deployment of the application to
+          different environments.
+
   - start-date: 2005-01-25
     end-date: 2005-09-02
     role: Software Engineer
     company: Standfirst Mobile
     location: Philippines
 
+    projects:
+      - title: Globe Telecom MyHandyGames
+        description: >-
+          Implemented the download portal and web based content management
+          system which serves Java games and other mobile content.
+      - title: Billing and Gateway Integration
+        description: >-
+          Implemented the integration of the company’s mobile applications with
+          Globe Telecoms’ billing platform (CSP) and WAP/SMS/MMS gateways.
+      - title: Adobe Flash Lite Download Site
+        description: >-
+          Developed a download site for WAP users.
+      - title: MyHandyGames SMS Broadcast Engine
+        description: >-
+          Developed an application used for sending promotional messages telco
+          users.
+      - title: System Administration
+        description: >-
+          Setup development environment (DB/CVS/Application Servers),
+          implemented high availability solutions for production servers, and
+          maintained company’s web site and email services.
+
   - start-date: 2004-03-08
     end-date: 2004-12-31
     role: Systems Administrator / Java Developer
     company: TinCan Mobile
     location: Philippines
+
+    projects:
+      - title: SMS Gateway/Text Center
+        description: >-
+          Developed SMS gateways which integrates the company’s SMS applications
+          to Globe and Smart telecoms.
+      - title: WAP Content Download Site
+        description: >-
+          Developed components for the company’s content download site.
+      - title: Subscriber Reporting and Management
+        description: >-
+          Developed report generation and subscriber management tools.
+      - title: System Administration
+        description: >-
+          Setup and maintenance of company domains (tincanmobile.com and
+          downloadoverload.com).  Maintained the production servers hosting the
+          company’s interactive messaging (SMS) platform (Tomcat/MySQL).  Setup
+          corporate LAN (development servers and 50 employee workstations), and
+          usual office services such as file & print servers.  Managed network
+          bandwidth using transparent proxy servers.  Provided technical support
+          for employees and coordinated with telecoms partners for customer
+          support.
+
+  - start-date: 2001-08-20
+    end-date: 2004-03-05
+    role: Software Engineer/Network Engineer
+    company: Purple Technologies
+    location: Philippines
+
+    projects:
+      - title: LTO (Land Transportation Office)
+        description: >-
+          Implemented WAN infrastructure to allow regional sites to communicate
+          with a partner company’s TPL insurance verification facility.
+      - title: NAPC (National Anti-Poverty Commission)
+        description: >-
+          Implemented inter-office wireless LAN with 802.11b access points and
+          supervised installation of structured cabling.
+      - title: Requirements Gathering
+        description:
+          - 'Analysed manual processes and contributed to the design of systems
+            for the following projects:'
+          - type: ul
+            text: |-
+              Multi-level marketing system, Javicomm International
+              Collection system, AMA Law Firm
+              Recruitment and accounting system, Krona Recruitment
+              Insurance verification system, LTO
