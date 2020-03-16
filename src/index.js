@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { connect, Provider, useDispatch } from 'react-redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import yaml from 'js-yaml';
 import { store, cvActions, uiActions } from 'store';
 import { ThemeProvider } from 'components';
@@ -23,8 +23,6 @@ const useStyles = makeStyles({
     height: '100vh'
   }
 });
-
-const mapStateToProps = state => ({ ...state });
 
 const loadApp = setApp => {
   const { setCv } = cvActions;
@@ -56,21 +54,23 @@ const loadApp = setApp => {
   };
 };
 
-const LoadableApp = connect(mapStateToProps)(({ cv, ui }) => {
+const LoadableApp = () => {
   const dispatch = useDispatch();
+  const status = useSelector(state => state.ui.status);
+  const error = useSelector(state => state.ui.error);
   const [LoadedApp, setLoadedApp] = useState(null);
   const classes = useStyles();
 
-  if (ui.status === 'not-loaded') {
+  if (status === 'not-loaded') {
     dispatch(loadApp(setLoadedApp));
   }
 
-  if (ui.status === 'loaded') {
+  if (status === 'loaded') {
     return <LoadedApp.component />;
-  } else if (ui.status === 'error') {
+  } else if (status === 'error') {
     return (
       <Dialog open={true}>
-        <DialogContent>{ui.error}</DialogContent>
+        <DialogContent>{error}</DialogContent>
         <DialogActions>
           <Button
             color="primary"
@@ -88,9 +88,9 @@ const LoadableApp = connect(mapStateToProps)(({ cv, ui }) => {
       </Container>
     );
   }
-});
+};
 
-const Root = props => {
+const Root = () => {
   return (
     <Provider store={store}>
       <ThemeProvider>

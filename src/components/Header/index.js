@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   AppBar,
   Toolbar,
@@ -36,15 +36,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const mapStateToProps = state => ({ cv: state.cv });
-const mapDispatchToProps = dispatch => ({
-  handleTogglePaletteTypeClick: () => dispatch(uiActions.togglePaletteType())
-});
-
-export const Header = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(({ cv, handleTogglePaletteTypeClick }) => {
+export const Header = () => {
+  const cv = useSelector(state => state.cv);
+  const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
   return (
@@ -97,7 +91,10 @@ export const Header = connect(
             </IconButton>
           </Tooltip>
           <Tooltip title="Toggle light/dark theme">
-            <IconButton color="inherit" onClick={handleTogglePaletteTypeClick}>
+            <IconButton
+              color="inherit"
+              onClick={() => dispatch(uiActions.togglePaletteType())}
+            >
               {theme.palette.type === 'light' ? (
                 <Brightness4 />
               ) : (
@@ -109,4 +106,4 @@ export const Header = connect(
       </Toolbar>
     </AppBar>
   );
-});
+};

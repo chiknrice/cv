@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Container, Paper, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { RichText } from 'components';
@@ -16,11 +16,8 @@ const useStyles = makeStyles({
   }
 });
 
-const mapStateToProps = state => ({
-  summary: state.cv.summary
-});
-
-export const Landing = connect(mapStateToProps)(({ summary }) => {
+export const Landing = () => {
+  const summary = useSelector(state => state.cv.summary);
   const classes = useStyles();
   return (
     <Paper elevation={0} className={classes.paper}>
@@ -36,4 +33,4 @@ export const Landing = connect(mapStateToProps)(({ summary }) => {
       </Container>
     </Paper>
   );
-});
+};
