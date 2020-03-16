@@ -15,7 +15,7 @@ const uiSlice = createSlice({
     themeOptions: {
       paletteType: 'light'
     },
-    selectedDate: 'first'
+    selectedTimelineElement: 0
   },
   reducers: {
     fetchAppRequested: state => {
@@ -32,8 +32,8 @@ const uiSlice = createSlice({
       state.themeOptions.paletteType =
         state.themeOptions.paletteType === 'light' ? 'dark' : 'light';
     },
-    setSelectedDate: (state, action) => {
-      state.selectedDate = action.payload;
+    setSelectedTimelineElement: (state, action) => {
+      state.selectedTimelineElement = action.payload;
     }
   }
 });

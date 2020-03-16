@@ -26,18 +26,26 @@ const useStyles = makeStyles({
 
 const uiSelector = state => state.ui;
 
-const selectedDateSelector = createSelector(uiSelector, ui => ui.selectedDate);
+const selectedTimelineElementSelector = createSelector(
+  uiSelector,
+  ui => ui.selectedTimelineElement
+);
 
 const cvSelector = state => state.cv;
 
 const workExperiencesSelector = createSelector(cvSelector, cv => cv.experience);
 
 const workExperiencesSummarySelector = createSelector(
+  selectedTimelineElementSelector,
   workExperiencesSelector,
-  workExperiences =>
-    workExperiences.map(workExperience => ({
-      startDate: workExperience['start-date'],
-      endDate: workExperience['end-date'] ?? 'Present',
+  (selectedTimelineElement, workExperiences) =>
+    workExperiences.map((workExperience, index) => ({
+      index,
+      active: selectedTimelineElement === index,
+      startDate: new Date(workExperience['start-date']),
+      endDate: workExperience['end-date']
+        ? new Date(workExperience['end-date'])
+        : null,
       role: workExperience.role,
       company: workExperience.company,
       location: workExperience.location
@@ -45,18 +53,15 @@ const workExperiencesSummarySelector = createSelector(
 );
 
 const selectedDateExperienceSelector = createSelector(
-  selectedDateSelector,
+  selectedTimelineElementSelector,
   workExperiencesSelector,
-  (selectedDate, workExperiences) =>
-    selectedDate === 'first'
-      ? workExperiences[0]
-      : workExperiences.find(
-          workExperience => workExperience['start-date'] === selectedDate
-        )
+  (selectedTimelineElement, workExperiences) =>
+    workExperiences[selectedTimelineElement]
 );
 
 const mapDispatchToProps = dispatch => ({
-  handleExperienceClick: date => dispatch(uiActions.setSelectedDate(date))
+  handleExperienceClick: index =>
+    dispatch(uiActions.setSelectedTimelineElement(index))
 });
 
 const mapStateToProps = state => ({
@@ -68,9 +73,18 @@ const WorkIcon = ({ active }) => {
   return <Work color={active ? 'primary' : 'disabled'} />;
 };
 
+const duration = (startDate, endDate) => {
+  endDate = endDate || new Date();
+  const months =
+    endDate.getMonth() -
+    startDate.getMonth() +
+    12 * (endDate.getFullYear() - startDate.getFullYear());
+  return months > 12 ? 'Years' : 'Months';
+};
+
 const WorkExperience = props => {
   const { experience, active, details, handleClick, ...stepProps } = props;
-  const { startDate, endDate, role, company, location } = experience;
+  const { index, startDate, endDate, role, company, location } = experience;
   const label = (
     <Typography
       variant={active ? 'h6' : 'subtitle1'}
@@ -79,8 +93,9 @@ const WorkExperience = props => {
   const caption = (
     <Typography
       variant={active ? 'subtitle1' : 'subtitle2'}
-      color={active ? 'textPrimary' : 'textSecondary'}
-    >{`${startDate} - ${endDate}`}</Typography>
+      color="textSecondary"
+    >{`${startDate.toLocaleDateString()} - ${endDate?.toLocaleDateString() ||
+      'Present'} (${duration(startDate, endDate)})`}</Typography>
   );
 
   const ref = React.createRef();
@@ -96,7 +111,7 @@ const WorkExperience = props => {
     <Step
       active={active}
       completed={false}
-      onClick={() => handleClick(startDate)}
+      onClick={() => !active && handleClick(index)}
       {...stepProps}
     >
       <StepLabel
@@ -137,16 +152,15 @@ export const Timeline = connect(
   mapStateToProps,
   mapDispatchToProps
 )(({ selectedTimelineElement, experiences, handleExperienceClick }) => {
-  const selectedDate = selectedTimelineElement['start-date'];
   const timelineElements = experiences.map(experience => {
-    const active = experience.startDate === selectedDate;
+    const { active, startDate } = experience;
     const details =
       active && selectedTimelineElement.projects ? (
         <Projects projects={selectedTimelineElement.projects} />
       ) : null;
     return (
       <WorkExperience
-        key={experience.startDate}
+        key={startDate}
         experience={experience}
         active={active}
         details={details}

@@ -34,6 +34,14 @@ const loadApp = setApp => {
     fetch('cv.yaml')
       .then(response => response.text())
       .then(data => yaml.load(data))
+      .then(json => ({
+        ...json,
+        experience: json.experience.map(exp => ({
+          ...exp,
+          'start-date': exp['start-date'].getTime(),
+          'end-date': exp['end-date']?.getTime() ?? null
+        }))
+      }))
       .then(loadedCv => {
         dispatch(setCv(loadedCv));
         return import('./App');
