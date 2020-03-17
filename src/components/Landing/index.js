@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Container, Paper, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { RichText } from 'components';
+import { qualificationSummarySelector } from 'store';
 
 const useStyles = makeStyles({
   topMargin: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
 });
 
 export const Landing = () => {
-  const summary = useSelector(state => state.cv.summary);
+  const summary = useSelector(qualificationSummarySelector);
   const classes = useStyles();
   return (
     <Paper elevation={0} className={classes.paper}>

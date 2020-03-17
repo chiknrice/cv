@@ -21,7 +21,7 @@ import {
   Brightness5
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { uiActions } from 'store';
+import { uiActions, personalDetailsSelector } from 'store';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Header = () => {
-  const cv = useSelector(state => state.cv);
+  const { name, contact } = useSelector(personalDetailsSelector);
   const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
@@ -58,7 +58,7 @@ export const Header = () => {
           </IconButton>
         </Hidden>
         <Typography variant="h5" className={classes.title}>
-          {cv.name}
+          {name}
         </Typography>
         <Hidden xsDown>
           <Tooltip title="About Me">
@@ -72,21 +72,17 @@ export const Header = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Email Me">
-            <IconButton color="inherit" href={`mailto:${cv.contact.email}`}>
+            <IconButton color="inherit" href={`mailto:${contact.email}`}>
               <Email />
             </IconButton>
           </Tooltip>
-          <Tooltip title={cv.contact.mobile}>
-            <IconButton color="inherit" href={`tel:${cv.contact.email}`}>
+          <Tooltip title={contact.mobile}>
+            <IconButton color="inherit" href={`tel:${contact.email}`}>
               <PhoneIphone />
             </IconButton>
           </Tooltip>
           <Tooltip title="My Github">
-            <IconButton
-              color="inherit"
-              href={cv.contact.github}
-              target="_blank"
-            >
+            <IconButton color="inherit" href={contact.github} target="_blank">
               <GitHub />
             </IconButton>
           </Tooltip>

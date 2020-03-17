@@ -6,7 +6,7 @@ import { uiActions } from 'store';
 import {
   selectedExperienceSelector,
   workExperiencesSummarySelector
-} from './selectors';
+} from 'store';
 import { WorkExperience } from './WorkExperience';
 import { Projects } from './Projects';
 

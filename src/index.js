@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import yaml from 'js-yaml';
-import { store, cvActions, uiActions } from 'store';
+import {
+  store,
+  cvActions,
+  uiActions,
+  uiStatusSelector,
+  uiErrorSelector
+} from 'store';
 import { ThemeProvider } from 'components';
 import {
   CssBaseline,
@@ -56,8 +62,8 @@ const loadApp = setApp => {
 
 const LoadableApp = () => {
   const dispatch = useDispatch();
-  const status = useSelector(state => state.ui.status);
-  const error = useSelector(state => state.ui.error);
+  const status = useSelector(uiStatusSelector);
+  const error = useSelector(uiErrorSelector);
   const [LoadedApp, setLoadedApp] = useState(null);
   const classes = useStyles();
 

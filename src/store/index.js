@@ -1,5 +1,15 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
+export {
+  uiStatusSelector,
+  uiErrorSelector,
+  themeOptionsSelector,
+  personalDetailsSelector,
+  qualificationSummarySelector,
+  selectedExperienceSelector,
+  workExperiencesSummarySelector
+} from './selectors';
+
 const cvSlice = createSlice({
   name: 'cv',
   initialState: {},

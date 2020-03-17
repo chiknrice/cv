@@ -2,12 +2,32 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const uiSelector = state => state.ui;
 
+const cvSelector = state => state.cv;
+
+export const uiStatusSelector = createSelector(uiSelector, ui => ui.status);
+
+export const uiErrorSelector = createSelector(uiSelector, ui => ui.error);
+
+export const themeOptionsSelector = createSelector(
+  uiSelector,
+  ui => ui.themeOptions
+);
+
+export const personalDetailsSelector = createSelector(cvSelector, cv => ({
+  name: cv.name,
+  contact: cv.contact,
+  address: cv.address
+}));
+
+export const qualificationSummarySelector = createSelector(
+  cvSelector,
+  cv => cv.summary
+);
+
 const selectedTimelineElementSelector = createSelector(
   uiSelector,
   ui => ui.selectedTimelineElement
 );
-
-const cvSelector = state => state.cv;
 
 const workExperiencesSelector = createSelector(cvSelector, cv => cv.experience);
 

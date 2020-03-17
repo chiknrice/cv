@@ -5,9 +5,10 @@ import {
 } from '@material-ui/core';
 import { blue, orange } from '@material-ui/core/colors';
 import { useSelector } from 'react-redux';
+import { themeOptionsSelector } from 'store';
 
 export const ThemeProvider = ({ children }) => {
-  const themeOptions = useSelector(state => state.ui.themeOptions);
+  const themeOptions = useSelector(themeOptionsSelector);
   const theme = createMuiTheme({
     palette: {
       primary: blue,
