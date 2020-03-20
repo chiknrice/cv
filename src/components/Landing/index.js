@@ -14,7 +14,7 @@ import { RichText } from 'components';
 import {
   qualificationSummarySelector,
   skillsTotalDurationSelector
-} from 'store';
+} from 'store/selectors';
 
 const useStyles = makeStyles({
   topMargin: {

@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { blue, orange } from '@material-ui/core/colors';
 import { useSelector } from 'react-redux';
-import { themeOptionsSelector } from 'store';
+import { themeOptionsSelector } from 'store/selectors';
 
 export const ThemeProvider = ({ children }) => {
   const themeOptions = useSelector(themeOptionsSelector);

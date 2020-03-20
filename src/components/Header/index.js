@@ -21,7 +21,8 @@ import {
   Brightness5
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { uiActions, personalDetailsSelector } from 'store';
+import { uiActions } from 'store';
+import { personalDetailsSelector } from 'store/selectors';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {

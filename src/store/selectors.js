@@ -4,10 +4,6 @@ const uiSelector = state => state.ui;
 
 const cvSelector = state => state.cv;
 
-const uiStatusSelector = createSelector(uiSelector, ui => ui.status);
-
-const uiErrorSelector = createSelector(uiSelector, ui => ui.error);
-
 const themeOptionsSelector = createSelector(uiSelector, ui => ui.themeOptions);
 
 const personalDetailsSelector = createSelector(cvSelector, cv => ({
@@ -106,8 +102,6 @@ const skillsTotalDurationSelector = createSelector(
 );
 
 export {
-  uiStatusSelector,
-  uiErrorSelector,
   themeOptionsSelector,
   skillsSelector,
   categoriesSelector,
