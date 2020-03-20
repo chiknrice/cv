@@ -4,10 +4,14 @@ export {
   uiStatusSelector,
   uiErrorSelector,
   themeOptionsSelector,
+  skillsSelector,
+  categoriesSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
   selectedExperienceSelector,
-  workExperiencesSummarySelector
+  workExperiencesSummarySelector,
+  skillsByExperienceSelector,
+  skillsTotalDurationSelector
 } from './selectors';
 
 const cvSlice = createSlice({

@@ -8,7 +8,7 @@ import {
   workExperiencesSummarySelector
 } from 'store';
 import { WorkExperience } from './WorkExperience';
-import { Projects } from './Projects';
+import { WorkExperienceDetail } from './WorkExperienceDetail';
 
 const useStyles = makeStyles({
   timeline: {
@@ -26,7 +26,7 @@ export const Timeline = () => {
     const { active, startDate } = experience;
     const details =
       active && selectedTimelineElement.projects ? (
-        <Projects projects={selectedTimelineElement.projects} />
+        <WorkExperienceDetail {...selectedTimelineElement} />
       ) : null;
     return (
       <WorkExperience
