@@ -18,22 +18,15 @@ const uiSlice = createSlice({
     selectedTimelineElement: 0
   },
   reducers: {
-    fetchAppRequested: state => {
-      state.status = 'loading';
-    },
-    fetchAppSuccess: state => {
-      state.status = 'loaded';
-    },
-    fetchAppFailed: (state, action) => {
-      state.status = 'error';
-      state.error = action.payload;
-    },
     togglePaletteType: state => {
       state.themeOptions.paletteType =
         state.themeOptions.paletteType === 'light' ? 'dark' : 'light';
     },
     setSelectedTimelineElement: (state, action) => {
       state.selectedTimelineElement = action.payload;
+    },
+    setCategories: (state, action) => {
+      state.categories = action.payload;
     }
   }
 });

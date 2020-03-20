@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { cvActions } from 'store';
+import { uiActions, cvActions } from 'store';
 import { fetchCv } from 'cvLoader';
 import {
   Container,
@@ -22,12 +22,13 @@ const useStyles = makeStyles({
 });
 
 const { setCv } = cvActions;
-
-const saveCv = cv => dispatch => dispatch(setCv(cv));
+const { setCategories } = uiActions;
 
 const loadApp = () => dispatch =>
   fetchCv()
-    .then(cv => dispatch(saveCv(cv)))
+    .then(([categories, cv]) =>
+      Promise.all([dispatch(setCv(cv)), dispatch(setCategories(categories))])
+    )
     .then(() => import('./App'));
 
 export const AppLoader = () => {

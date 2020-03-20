@@ -33,13 +33,15 @@ const normaliseCv = ({
     }
   );
 
-  return {
-    ...rest,
-    education: normalisedEducation,
-    experience: normalisedExperiences,
-    categories,
-    skills: normalisedSkills
-  };
+  return [
+    categories.map(category => ({ name: category, selected: false })),
+    {
+      ...rest,
+      education: normalisedEducation,
+      experience: normalisedExperiences,
+      skills: normalisedSkills
+    }
+  ];
 };
 
 export const fetchCv = () =>
