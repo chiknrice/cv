@@ -17,9 +17,12 @@ const qualificationSummarySelector = createSelector(
   cv => cv.summary
 );
 
-const categoriesSelector = createSelector(cvSelector, cv => cv.categories);
+const categoriesLookupSelector = createSelector(
+  cvSelector,
+  cv => cv.categories
+);
 
-const skillsSelector = createSelector(cvSelector, cv => cv.skills);
+const skillsLookupSelector = createSelector(cvSelector, cv => cv.skills);
 
 const selectedTimelineElementSelector = createSelector(
   uiSelector,
@@ -78,33 +81,34 @@ const skillsByExperienceSelector = createSelector(
   workExperiencesSelector,
   workExperiences =>
     workExperiences.flatMap(workExperience =>
-      workExperience.skills.map(skill =>
-        (({ index, duration }) => ({ index, duration, name: skill }))(
-          workExperience
-        )
+      workExperience.skills.map(skillIndex =>
+        (({ index, duration }) => ({
+          index: skillIndex,
+          experienceIndex: index,
+          duration
+        }))(workExperience)
       )
     )
 );
 
 const skillsTotalDurationSelector = createSelector(
-  skillsSelector,
   skillsByExperienceSelector,
-  (skillIndex, skills) => {
+  skills => {
     return Object.entries(
       skills.reduceRight((map, skill) => {
-        map[skill.name] = skill.duration + (map[skill.name] ?? 0);
+        map[skill.index] = skill.duration + (map[skill.index] ?? 0);
         return map;
       }, {})
     )
-      .map(([skill, duration]) => ({ skill: skillIndex[skill].name, duration }))
+      .map(([index, duration]) => ({ index, duration }))
       .sort((a, b) => a.duration - b.duration);
   }
 );
 
 export {
   themeOptionsSelector,
-  skillsSelector,
-  categoriesSelector,
+  categoriesLookupSelector,
+  skillsLookupSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
   selectedExperienceSelector,

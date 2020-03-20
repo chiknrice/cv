@@ -12,6 +12,7 @@ import { Animation } from '@devexpress/dx-react-chart';
 import { makeStyles } from '@material-ui/styles';
 import { RichText } from 'components';
 import {
+  skillsLookupSelector,
   qualificationSummarySelector,
   skillsTotalDurationSelector
 } from 'store/selectors';
@@ -30,8 +31,13 @@ const useStyles = makeStyles({
 
 export const Landing = () => {
   const summary = useSelector(qualificationSummarySelector);
+  const skillsLookup = useSelector(skillsLookupSelector);
   const skillsByDuration = useSelector(skillsTotalDurationSelector);
   const classes = useStyles();
+  const data = skillsByDuration.slice(-10).map(({ index, duration }) => ({
+    duration,
+    name: skillsLookup[index].name
+  }));
   return (
     <Paper elevation={0} className={classes.paper}>
       <Container className={classes.topPadding}>
@@ -44,12 +50,12 @@ export const Landing = () => {
           align="justify"
         />
         <Paper elevation={0}>
-          <Chart data={skillsByDuration.slice(-10)} rotated>
+          <Chart data={data} rotated>
             <Title text="Skills" />
             <Animation />
             <ArgumentAxis />
             <ValueAxis showLabels={false} />
-            <BarSeries argumentField="skill" valueField="duration" />
+            <BarSeries argumentField="name" valueField="duration" />
           </Chart>
         </Paper>
       </Container>
