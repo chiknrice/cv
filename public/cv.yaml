@@ -30,162 +30,308 @@ summary:
     Aside from developing applications, he also enjoys designing and building
     automated tests and contributing to the open source community.
 
-skills:
-  - &java Java
-  - &js Javascript
-  - &kt Kotlin
-  - &groovy Groovy
-  - &obj-c Ojbective-C
-  - &go GoLang
-  - &sh Bash
-  - &py Python
-  - &sql SQL
-  - &pl-sql PL/SQL
+meta:
+  categories:
+    - &lang Language
+    - &db Database
+    - &web Web/HTTP
+    - &mobile Mobile
+    - &i9n Integration
+    - &test Testing
+    - &cicd CI/CD
+    - &os Operating System
+    - &build Build Tools
+    - &scm Source Management
+    - &server Server
+    - &ui Front End
+    - &lib Library
+    - &doc Documentation
+    - &unix Unix/Linux
+    - &f7k Framework
+    - &java Java
+    - &js Javascript
+    - &spring Spring
+    - &j2ee J2EE
+    - &debug Debugging
+    - &tools Dev Tools
+    - &sec Security
+    - &colab Collabortion Tools
 
-  - &spring Spring Framework
-  - &spring-boot Spring Boot
-  - &spring-cloud Spring Cloud
-  - &spring-batch Spring Batch
-  - &spring-data Spring Data
-  - &spring-security Spring Security
-  - &spring-webflux Spring Webflux
-  - &spring-ws Spring Web Services
-  - &spring-integration Spring Integration
-  - &spring-test Spring Test
-  - &spring-restdocs Spring REST Docs
-
-  - &react React
-  - &redux Redux
-  - &redux-saga Redux-Saga
-  - &jest Jest
-  - &jquery jQuery
-  - &nodejs NodeJS
-  - &expressjs ExpressJS
-  - &html HTML
-  - &xml XML & XSD
-  - &css CSS/SASS
-  - &json JSON
-  - &yaml YAML
-  - &regex Regex
-  - &velocity Velocity Templates
-  - &jwt JWT
-
-  - &rest REST Web Service
-  - &soap SOAP
-  - &jaxrs JAX-RS
-  - &jaxws JAX-WS
-  - &jaxb JAXB
-  - &swagger Swagger
-
-  - &rabbitmq RabbitMQ (AMQP)
-  - &struts Struts
-  - &servlets Servlets
-  - &jsp JSP
-  - &jsf JSF
-  - &ejb EJB
-  - &jpa JPA
-  - &jmx JMX
-  - &jms JMS
-  - &vaadin Vaadin
-
-  - &mina Apache MINA
-  - &nio Java NIO
-  - &ssh SSH/SCP/SFTP
-  - &telnet Telnet
-
-  - &httpd Apache HTTP
-  - &tomcat Apache Tomcat & TomEE
-  - &weblogic Weblogic
-  - &websphere Websphere
-  - &jboss JBoss
-  - &glassfish Glassfish
-  - &mobilefirst MobileFirst
-
-  - &hibernate Hibernate
-  - &oracle Oracle DB
-  - &postgres PostgreSQL
-  - &mongo Mongo DB
-  - &sybase Sybase
-  - &mssql MS SQL
-  - &hsql HSQL DB
-  - &liquibase Liquibase
-  - &flyway Flyway
-  - &robomongo RoboMongo
-  - &navicat Navicat
-  - &toad Toad
-
-  - &junit JUnit
-  - &mockito Mockito
-  - &testng TestNG
-  - &wiremock WireMock
-  - &geb Geb
-  - &spock Spock
-  - &concordion Concordion
-  - &selenium Selenium
-  - &cucumber Cucumber
-  - &soapui SoapUI
-  - &postman Postman
-  - &jmeter JMeter
-  - &dbunit DB Unit
-
-  - &jpda JPDA
-  - &jprofiler JProfiler
-  - &beyond-compar
-
-  - &loggers Logback/Log4j/slf4j
-
-  - &ant Ant
-  - &maven Maven
-  - &gradle Gradle
-
-  - &jenkins Jenkins
-  - &jenkins-pipeline Jenkins Pipeline
-  - &docker Docker
-  - &docker-swarm Docker Swarm
-  - &ansible Ansible
-  - &openshift Openshift
-  - &vault Vault
-  - &travisci TravisCI
-  - &artifactory Artifactory
-  - &nexus Nexus
-  - &vagrant Vagrant
-  - &vmware VMWare
-  - &virtual-box VirtualBox
-
-  - &eclipse Eclipse
-  - &intellij IntelliJ
-  - &xcode Xcode
-  - &vscode VS Code
-  - &vs Visual Studio
-  - &ryder Ryder
-  - &vi Vi/Vim
-
-  - &cvs CVS
-  - &svn SVN
-  - &git Git
-  - &bitbucket Bitbucket
-  - &github Github
-  - &tortoise Tortoise
-
-  - &jira JIRA
-  - &confluence Confluence
-  - &mantis Mantis
-  - &test-director Test Director
-
-  - &agile Agile
-  - &waterfall Waterfall
-
-  - &uml UML
-  - &visio Visio
-  - &balsamiq Balsamiq Mockups
-
-  - &qlikview QlikView
-  - &jasper-reports Jasper Reports
-  - &crystal-reports Crystal Reports
-
-  - &windows Windows
-  - &linux Linux
-  - &macos Mac OS
+  skills:
+    - name: &java Java
+      categories: [*lang, *java]
+    - name: &js Javascript
+      categories: [*lang, *js]
+    - name: &kt Kotlin
+      categories: [*lang]
+    - name: &grvy Groovy
+      categories: [*lang]
+    - name: &objc Ojbective-C
+      categories: [*lang, *mobile]
+    - name: &go GoLang
+      categories: [*lang]
+    - name: &sh Bash
+      categories: [*unix]
+    - name: &py Python
+      categories: [*lang]
+    - name: &sql SQL
+      categories: [*lang, *db]
+    - name: &plsql PL/SQL
+      categories: [*lang, *db]
+    - name: &spring Spring Framework
+      categories: [*f7k, *lib, *spring, *server]
+    - name: &spring-boot Spring Boot
+      categories: [*f7k, *lib, *spring, *server]
+    - name: &spring-cloud Spring Cloud
+      categories: [*f7k, *lib, *spring, *server]
+    - name: &spring-batch Spring Batch
+      categories: [*f7k, *lib, *spring, *server]
+    - name: &spring-data Spring Data
+      categories: [*f7k, *lib, *spring, *server, *db]
+    - name: &spring-security Spring Security
+      categories: [*f7k, *lib, *spring, *server]
+    - name: &spring-webflux Spring Webflux
+      categories: [*f7k, *lib, *spring, *server, *web]
+    - name: &spring-ws Spring Web Services
+      categories: [*f7k, *lib, *spring, *server, *web, *i9n]
+    - name: &spring-i9n Spring Integration
+      categories: [*f7k, *lib, *spring, *server, *web, *i9n]
+    - name: &spring-test Spring Test
+      categories: [*f7k, *lib, *spring, *test]
+    - name: &spring-restdocs Spring REST Docs
+      categories: [*f7k, *lib, *spring, *doc, *test]
+    - name: &react React
+      categories: [*f7k, *lib, *js, *ui]
+    - name: &redux Redux
+      categories: [*f7k, *lib, *js]
+    - name: &redux-saga Redux-Saga
+      categories: [*f7k, *lib, *js]
+    - name: &jest Jest
+      categories: [*f7k, *lib, *js, *test]
+    - name: &jquery jQuery
+      categories: [*lib, *js]
+    - name: &nodejs NodeJS
+      categories: [*lib, *js, *server]
+    - name: &expressjs ExpressJS
+      categories: [*f7k, *lib, *js, *server, *web]
+    - name: &html HTML
+      categories: [*lang, *web, *ui]
+    - name: &xml XML & XSD
+      categories: [*lang, *tools]
+    - name: &css CSS/SASS
+      categories: [*lang, *web, *ui]
+    - name: &json JSON
+      categories: [*js, *tools]
+    - name: &yaml YAML
+      categories: [*lang, *tools]
+    - name: &regex Regex
+      categories: [*lang, *tools]
+    - name: &velocity Velocity Templates
+      categories: [*lib, *tools]
+    - name: &jwt JWT
+      categories: [*web, *i9n, *sec]
+    - name: &rest REST Web Service
+      categories: [*web, *i9n, *server]
+    - name: &soap SOAP
+      categories: [*web, *i9n]
+    - name: &jaxrs JAX-RS
+      categories: [*j2ee, *web, *i9n, *java, *server]
+    - name: &jaxws JAX-WS
+      categories: [*j2ee, *web, *i9n, *java, *server]
+    - name: &jaxb JAXB
+      categories: [*f7k, *lib, *java]
+    - name: &swagger Swagger
+      categories: [*f7k, *lib, *web, *i9n, *doc, *server]
+    - name: &rabbitmq RabbitMQ (AMQP)
+      categories: [*lib, *i9n]
+    - name: &struts Struts
+      categories: [*f7k, *lib, *ui, *web, *java, *server]
+    - name: &servlets Servlets
+      categories: [*f7k, *j2ee, *web, *java, *server]
+    - name: &jsp JSP
+      categories: [*f7k, *lib, *ui, *web, *java, *server]
+    - name: &jsf JSF
+      categories: [*f7k, *lib, *ui, *web, *java, *server]
+    - name: &ejb EJB
+      categories: [*f7k, *lib, *ui, *web, *java, *server]
+    - name: &jpa JPA
+      categories: [*f7k, *lib, *java, *server, *db]
+    - name: &jmx JMX
+      categories: [*f7k, *lib, *java]
+    - name: &jms JMS
+      categories: [*f7k, *lib, *java, *i9n]
+    - name: &vaadin Vaadin
+      categories: [*f7k, *lib, *ui, *web, *java]
+    - name: &mina Apache MINA
+      categories: [*f7k, *lib, *java, *i9n]
+    - name: &nio Java NIO
+      categories: [*f7k, *java, *i9n]
+    - name: &ssh SSH/SCP/SFTP
+      categories: [*unix, *sec, *tools]
+    - name: &telnet Telnet
+      categories: [*unix, *tools, *debug]
+    - name: &httpd Apache HTTP
+      categories: [*server, *web]
+    - name: &tomcat Apache Tomcat & TomEE
+      categories: [*server, *java, *web, *j2ee]
+    - name: &weblogic Weblogic
+      categories: [*server, *java, *web, *j2ee]
+    - name: &websphere Websphere
+      categories: [*server, *java, *web, *j2ee]
+    - name: &jboss JBoss
+      categories: [*server, *java, *web, *j2ee]
+    - name: &glassfish Glassfish
+      categories: [*server, *java, *web, *j2ee]
+    - name: &mobilefirst MobileFirst
+      categories: [*server, *java, *web, *j2ee, *js]
+    - name: &hibernate Hibernate
+      categories: [*f7k, *lib, *java, *db]
+    - name: &oracle Oracle DB
+      categories: [*db]
+    - name: &postgres PostgreSQL
+      categories: [*db]
+    - name: &mongo Mongo DB
+      categories: [*db]
+    - name: &sybase Sybase
+      categories: [*db]
+    - name: &mssql MS SQL
+      categories: [*db]
+    - name: &hsql HSQL DB
+      categories: [*db]
+    - name: &liquibase Liquibase
+      categories: [*db, *tools, *build, *scm]
+    - name: &flyway Flyway
+      categories: [*db, *tools, *build, *scm]
+    - name: &robomongo RoboMongo
+      categories: [*db, *tools]
+    - name: &navicat Navicat
+      categories: [*db, *tools]
+    - name: &toad Toad
+      categories: [*db, *tools]
+    - name: &junit JUnit
+      categories: [*f7k, *lib, *test]
+    - name: &mockito Mockito
+      categories: [*f7k, *lib, *test, *tools]
+    - name: &testng TestNG
+      categories: [*f7k, *lib, *test]
+    - name: &wiremock WireMock
+      categories: [*f7k, *lib, *test, *web]
+    - name: &geb Geb
+      categories: [*f7k, *lib, *test, *web]
+    - name: &spock Spock
+      categories: [*f7k, *lib, *test]
+    - name: &concordion Concordion
+      categories: [*f7k, *lib, *test]
+    - name: &selenium Selenium
+      categories: [*f7k, *lib, *test, *web]
+    - name: &cucumber Cucumber
+      categories: [*f7k, *lib, *test]
+    - name: &soapui SoapUI
+      categories: [*tools, *test, *web]
+    - name: &postman Postman
+      categories: [*tools, *test, *web]
+    - name: &jmeter JMeter
+      categories: [*tools, *test]
+    - name: &dbunit DB Unit
+      categories: [*lib, *tools, *test, *db]
+    - name: &jpda JPDA
+      categories: [*tools, *debug, *java]
+    - name: &jprofiler JProfiler
+      categories: [*tools, *debug]
+    - name: &beyond-compare Beyond Compare
+      categories: [*tools, *debug]
+    - name: &loggers Logback/Log4j/slf4j
+      categories: [*f7k, *lib, *tools, *debug]
+    - name: &ant Ant
+      categories: [*tools, *build]
+    - name: &maven Maven
+      categories: [*tools, *build]
+    - name: &gradle Gradle
+      categories: [*tools, *build]
+    - name: &jenkins Jenkins
+      categories: [*server, *tools, *build, *cicd]
+    - name: &jenkins-pipeline Jenkins Pipeline
+      categories: [*tools, *build, *cicd]
+    - name: &docker Docker
+      categories: [*tools, *cicd]
+    - name: &docker-swarm Docker Swarm
+      categories: [*tools, *cicd]
+    - name: &ansible Ansible
+      categories: [*tools, *cicd]
+    - name: &openshift Openshift
+      categories: [*tools, *cicd, *server]
+    - name: &vault Vault
+      categories: [*tools, *sec]
+    - name: &travisci TravisCI
+      categories: [*cicd]
+    - name: &artifactory Artifactory
+      categories: [*server, *cicd]
+    - name: &nexus Nexus
+      categories: [*server, *cicd]
+    - name: &vagrant Vagrant
+      categories: [*tools, *cicd]
+    - name: &vmware VMWare
+      categories: [*tools, *cicd]
+    - name: &virtual-box VirtualBox
+      categories: [*tools, *cicd]
+    - name: &eclipse Eclipse
+      categories: [*tools]
+    - name: &intellij IntelliJ
+      categories: [*tools]
+    - name: &xcode Xcode
+      categories: [*tools]
+    - name: &vscode VS Code
+      categories: [*tools]
+    - name: &vs Visual Studio
+      categories: [*tools]
+    - name: &ryder Ryder
+      categories: [*tools]
+    - name: &vi Vi/Vim
+      categories: [*tools, *unix]
+    - name: &cvs CVS
+      categories: [*tools, *scm]
+    - name: &svn SVN
+      categories: [*tools, *scm]
+    - name: &git Git
+      categories: [*tools, *scm]
+    - name: &bitbucket Bitbucket
+      categories: [*tools, *scm, *colab]
+    - name: &github Github
+      categories: [*tools, *scm, *colab]
+    - name: &tortoise Tortoise
+      categories: [*tools, *scm]
+    - name: &jira JIRA
+      categories: [*tools, *colab]
+    - name: &confluence Confluence
+      categories: [*tools, *colab]
+    - name: &mantis Mantis
+      categories: [*tools, *colab]
+    - name: &test-director Test Director
+      categories: [*tools, *colab]
+    - name: &agile Agile
+      categories: [*tools]
+    - name: &waterfall Waterfall
+      categories: [*tools]
+    - name: &uml UML
+      categories: [*tools]
+    - name: &visio Visio
+      categories: [*tools]
+    - name: &balsamiq Balsamiq Mockups
+      categories: [*tools, *ui]
+    - name: &qlikview QlikView
+      categories: [*f7k, *tools]
+    - name: &jasper-reports Jasper Reports
+      categories: [*f7k, *lib]
+    - name: &crystal-reports Crystal Reports
+      categories: [*f7k, *lib]
+    - name: &windows Windows
+      categories: [*tools, *os]
+    - name: &linux Linux
+      categories: [*tools, *os, *unix]
+    - name: &macos Mac OS
+      categories: [*tools, *os, *unix]
+    - name: &bsd FreeBSD
+      categories: [*tools, *os, *unix]
 
 experience:
   - start-date: 2019-07-30
@@ -194,25 +340,27 @@ experience:
     team: TODO
     location: New Zealand
     skills:
-      - *js
-      - *react
-      - *redux
-      - *redux-saga
-      - *jest
-      - *java
-      - *servlets
-      - *spring-boot
-      - *spring-webflux
-      - *mobilefirst
-      - *websphere
-      - *rest
-      - *windows
-      - *linux
-      - *maven
-      - *git
-      - *confluence
-      - *bitbucket
-      - *jira
+      [
+        *js,
+        *react,
+        *redux,
+        *redux-saga,
+        *jest,
+        *java,
+        *servlets,
+        *spring-boot,
+        *spring-webflux,
+        *mobilefirst,
+        *websphere,
+        *rest,
+        *windows,
+        *linux,
+        *maven,
+        *git,
+        *confluence,
+        *bitbucket,
+        *jira,
+      ]
 
     projects:
       - title: WestpacONE Enhancements
@@ -234,6 +382,7 @@ experience:
     team: CSP
     location: New Zealand
     skills:
+      - *java
       - *openshift
       - *spring-boot
       - *rest
@@ -242,7 +391,6 @@ experience:
       - *oracle
       - *flyway
       - *maven
-      - *rest
       - *hibernate
       - *linux
       - *windows
@@ -282,7 +430,7 @@ experience:
       - *struts
       - *vaadin
       - *jwt
-      - *groovy
+      - *grvy
       - *geb
       - *spock
       - *docker
@@ -346,6 +494,8 @@ experience:
     company: Verifone/Eftpos
     team: BAU
     location: New Zealand
+    skills:
+      - *java
 
     projects:
       - title: Configuration Server
@@ -378,6 +528,8 @@ experience:
     company: Verifone/Eftpos
     team: TPA
     location: New Zealand
+    skills:
+      - *java
 
     projects:
       - title: TPA Integration
@@ -397,6 +549,8 @@ experience:
     company: Verifone/Eftpos
     team: Online
     location: New Zealand
+    skills:
+      - *java
 
     projects:
       - title: EFTEX Integration
@@ -420,6 +574,8 @@ experience:
     company: Verifone/Eftpos
     team: Gateway Platform
     location: New Zealand
+    skills:
+      - *java
 
     projects:
       - title: Merchant and Terminal Onboarding System
@@ -439,6 +595,8 @@ experience:
     company: iScale Solutions
     team: Merchant Portal
     location: Philippines
+    skills:
+      - *java
 
     projects:
       - title: Merchant Portal
@@ -474,6 +632,8 @@ experience:
     company: iScale Solutions
     team: Merchant Portal
     location: Philippines
+    skills:
+      - *java
 
     projects:
       - title: Manila Team Up Setup
@@ -512,6 +672,9 @@ experience:
     company: New Edge Financial
     team: TODO
     location: Singapore
+    skills:
+      - *java
+      - *plsql
 
     projects:
       - title: Fimatrix Customization
@@ -530,6 +693,9 @@ experience:
     company: Welcome Real-Time
     team: Product Development
     location: Singapore
+    skills:
+      - *java
+      - *plsql
 
     projects:
       - title: Catalogue Redemption Module
@@ -609,6 +775,8 @@ experience:
     company: Welcome Real-Time
     team: Project/Maintenance Services
     location: Singapore
+    skills:
+      - *java
 
     projects:
       - title: Loyalty Platform Customisations
@@ -627,6 +795,8 @@ experience:
     role: Senior Software Developer
     company: iPop Networks
     location: Singapore
+    skills:
+      - *java
 
     projects:
       - title: BMX2 (SMS Routing and Billing Platform)
@@ -679,6 +849,8 @@ experience:
     role: Software Engineer
     company: GXS
     location: Philippines
+    skills:
+      - *java
 
     projects:
       - title: IPCnet (Subway Company)
@@ -695,6 +867,8 @@ experience:
     role: Software Engineer
     company: Standfirst Mobile
     location: Philippines
+    skills:
+      - *java
 
     projects:
       - title: Globe Telecom MyHandyGames
@@ -723,6 +897,8 @@ experience:
     role: Systems Administrator / Java Developer
     company: TinCan Mobile
     location: Philippines
+    skills:
+      - *java
 
     projects:
       - title: SMS Gateway/Text Center
@@ -751,6 +927,8 @@ experience:
     role: Software Engineer/Network Engineer
     company: Purple Technologies
     location: Philippines
+    skills:
+      - *linux
 
     projects:
       - title: LTO (Land Transportation Office)
