@@ -18,6 +18,15 @@ const categoriesLookupSelector = createSelector(
   filters => filters.categories
 );
 
+const selectedCategoriesSelector = createSelector(
+  categoriesLookupSelector,
+  categories =>
+    categories.reduce((container, category, index) => {
+      if (category.selected) container.push(index);
+      return container;
+    }, [])
+);
+
 const skillsLookupSelector = createSelector(
   filtersSelector,
   filters => filters.skills
@@ -30,13 +39,27 @@ const selectedSkillsSelector = createSelector(skillsLookupSelector, skills =>
   }, [])
 );
 
-const selectedCategoriesSelector = createSelector(
-  categoriesLookupSelector,
-  categories =>
-    categories.reduce((container, category, index) => {
-      if (category.selected) container.push(index);
-      return container;
-    }, [])
+/**
+ * Unlike skillsLookup, the position of the element does not represent the lookup position of the skill
+ */
+const sortedSkillsSelector = createSelector(skillsLookupSelector, skills =>
+  [...skills].sort((a, b) => a.duration - b.duration)
+);
+
+const filteredSkillsSelector = createSelector(
+  skillsLookupSelector,
+  selectedSkillsSelector,
+  selectedCategoriesSelector,
+  (skills, selectedSkills, selectedCategories) =>
+    skills
+      .filter(
+        (skill, index) =>
+          selectedSkills.includes(index) ||
+          skill.categories.filter(category =>
+            selectedCategories.includes(category)
+          ).length > 0
+      )
+      .map(skill => skill.index)
 );
 
 const personalDetailsSelector = createSelector(cvSelector, cv => ({
@@ -56,15 +79,9 @@ const selectedTimelineElementSelector = createSelector(
   ui => ui.selectedTimelineElement
 );
 
-const duration = (startDate, endDate) => {
-  endDate = endDate ?? new Date();
-  const months =
-    endDate.getMonth() -
-    startDate.getMonth() +
-    12 * (endDate.getFullYear() - startDate.getFullYear());
-  return months;
-};
-
+/**
+ * Adds index and converts the start and end dates to actual dates
+ */
 const workExperiencesSelector = createSelector(cvSelector, cv =>
   cv.experience.map((exp, index) => {
     const startDate = new Date(exp.startDate);
@@ -73,8 +90,7 @@ const workExperiencesSelector = createSelector(cvSelector, cv =>
       ...exp,
       index,
       startDate,
-      endDate,
-      duration: duration(startDate, endDate)
+      endDate
     };
   })
 );
@@ -104,34 +120,6 @@ const selectedExperienceSelector = createSelector(
     workExperiences[selectedTimelineElement]
 );
 
-const skillsByExperienceSelector = createSelector(
-  workExperiencesSelector,
-  workExperiences =>
-    workExperiences.flatMap(workExperience =>
-      workExperience.skills.map(skillIndex =>
-        (({ index, duration }) => ({
-          index: skillIndex,
-          experienceIndex: index,
-          duration
-        }))(workExperience)
-      )
-    )
-);
-
-const skillsTotalDurationSelector = createSelector(
-  skillsByExperienceSelector,
-  skills => {
-    return Object.entries(
-      skills.reduceRight((map, skill) => {
-        map[skill.index] = skill.duration + (map[skill.index] ?? 0);
-        return map;
-      }, {})
-    )
-      .map(([index, duration]) => ({ index, duration }))
-      .sort((a, b) => a.duration - b.duration);
-  }
-);
-
 export {
   themeOptionsSelector,
   filterDrawerVisibleSelector,
@@ -139,10 +127,10 @@ export {
   selectedCategoriesSelector,
   skillsLookupSelector,
   selectedSkillsSelector,
+  sortedSkillsSelector,
+  filteredSkillsSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
   selectedExperienceSelector,
-  workExperiencesSummarySelector,
-  skillsByExperienceSelector,
-  skillsTotalDurationSelector
+  workExperiencesSummarySelector
 };
