@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Container, Paper, Typography, Divider } from '@material-ui/core';
 import {
   Chart,
-  Title,
   ArgumentAxis,
   ValueAxis,
   BarSeries
@@ -42,16 +41,16 @@ export const Landing = () => {
     <Paper elevation={0} className={classes.paper}>
       <Container className={classes.topPadding}>
         <Typography variant="h4">Qualification Summary</Typography>
-        <Divider className={classes.topMargin} />
         <RichText
           text={summary}
           variant="body1"
           className={classes.topMargin}
           align="justify"
         />
-        <Paper elevation={0}>
+        <Divider className={classes.topMargin} />
+        <Paper elevation={0} className={classes.topPadding}>
+          <Typography variant="h4">Top Skills</Typography>
           <Chart data={data} rotated>
-            <Title text="Skills" />
             <Animation />
             <ArgumentAxis />
             <ValueAxis showLabels={false} />

@@ -3,3 +3,4 @@ export { Timeline } from './Timeline';
 export { Landing } from './Landing';
 export { RichText } from './RichText';
 export { ThemeProvider } from './ThemeProvider';
+export { SkillsFilter } from './SkillsFilter';

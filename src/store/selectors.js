@@ -6,8 +6,42 @@ const cvSelector = state => state.cv;
 
 const themeOptionsSelector = createSelector(uiSelector, ui => ui.themeOptions);
 
+const filtersSelector = createSelector(uiSelector, ui => ui.filters);
+
+const filterDrawerVisibleSelector = createSelector(
+  filtersSelector,
+  filters => filters.drawerVisible
+);
+
+const categoriesLookupSelector = createSelector(
+  filtersSelector,
+  filters => filters.categories
+);
+
+const skillsLookupSelector = createSelector(
+  filtersSelector,
+  filters => filters.skills
+);
+
+const selectedSkillsSelector = createSelector(skillsLookupSelector, skills =>
+  skills.reduce((container, skill, index) => {
+    if (skill.selected) container.push(index);
+    return container;
+  }, [])
+);
+
+const selectedCategoriesSelector = createSelector(
+  categoriesLookupSelector,
+  categories =>
+    categories.reduce((container, category, index) => {
+      if (category.selected) container.push(index);
+      return container;
+    }, [])
+);
+
 const personalDetailsSelector = createSelector(cvSelector, cv => ({
   name: cv.name,
+  shortName: cv['short-name'],
   contact: cv.contact,
   address: cv.address
 }));
@@ -16,13 +50,6 @@ const qualificationSummarySelector = createSelector(
   cvSelector,
   cv => cv.summary
 );
-
-const categoriesLookupSelector = createSelector(
-  cvSelector,
-  cv => cv.categories
-);
-
-const skillsLookupSelector = createSelector(cvSelector, cv => cv.skills);
 
 const selectedTimelineElementSelector = createSelector(
   uiSelector,
@@ -107,8 +134,11 @@ const skillsTotalDurationSelector = createSelector(
 
 export {
   themeOptionsSelector,
+  filterDrawerVisibleSelector,
   categoriesLookupSelector,
+  selectedCategoriesSelector,
   skillsLookupSelector,
+  selectedSkillsSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
   selectedExperienceSelector,

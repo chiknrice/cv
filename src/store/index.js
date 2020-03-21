@@ -15,6 +15,9 @@ const uiSlice = createSlice({
     themeOptions: {
       paletteType: 'light'
     },
+    filters: {
+      drawerVisible: false
+    },
     selectedTimelineElement: 0
   },
   reducers: {
@@ -25,8 +28,29 @@ const uiSlice = createSlice({
     setSelectedTimelineElement: (state, action) => {
       state.selectedTimelineElement = action.payload;
     },
-    setCategories: (state, action) => {
-      state.categories = action.payload;
+    setFilterDrawerVisible: (state, action) => {
+      state.filters.drawerVisible = action.payload;
+    },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+    },
+    setCategoriesSelected: (state, { payload: selectedIndexes }) => {
+      state.filters.categories.forEach((category, index) => {
+        if (category.selected && !selectedIndexes.includes(index)) {
+          category.selected = false;
+        } else if (!category.selected && selectedIndexes.includes(index)) {
+          category.selected = true;
+        }
+      });
+    },
+    setSkillsSelected: (state, { payload: selectedIndexes }) => {
+      state.filters.skills.forEach((skill, index) => {
+        if (skill.selected && !selectedIndexes.includes(index)) {
+          skill.selected = false;
+        } else if (!skill.selected && selectedIndexes.includes(index)) {
+          skill.selected = true;
+        }
+      });
     }
   }
 });

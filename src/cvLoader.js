@@ -16,7 +16,8 @@ const normaliseCv = ({
   }, {});
   const normalisedSkills = skills.map(({ name, categories }) => ({
     name,
-    categories: categories.map(category => categoriesIndex[category])
+    categories: categories.map(category => categoriesIndex[category]),
+    selected: false
   }));
   const normalisedEducation = education.map(educ => {
     const { 'start-year': startYear, 'end-year': endYear, ...rest } = educ;
@@ -34,12 +35,17 @@ const normaliseCv = ({
   );
 
   return [
-    categories.map(category => ({ name: category, selected: false })),
+    {
+      categories: categories.map(category => ({
+        name: category,
+        selected: false
+      })),
+      skills: normalisedSkills
+    },
     {
       ...rest,
       education: normalisedEducation,
-      experience: normalisedExperiences,
-      skills: normalisedSkills
+      experience: normalisedExperiences
     }
   ];
 };
