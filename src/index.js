@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from 'store';
-import { ThemeProvider } from 'components';
+import { ThemeProvider, AppLoader } from 'components';
 import { CssBaseline } from '@material-ui/core';
-import { AppLoader } from 'AppLoader';
 
 const Root = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { uiActions, cvActions } from 'store';
-import { fetchCv } from 'cvLoader';
+import { fetchCv } from 'components/cvLoader';
 import {
   Container,
   CircularProgress,
