@@ -26,7 +26,7 @@ const { setFilters } = uiActions;
 
 const loadApp = () => dispatch =>
   fetchCv()
-    .then(([filters, cv]) =>
+    .then(({ filters, cv }) =>
       Promise.all([dispatch(setCv(cv)), dispatch(setFilters(filters))])
     )
     .then(() => import('./App'));

@@ -15,29 +15,29 @@ const normaliseCv = ({
   experience,
   ...rest
 }) => {
+  const categoriesIndexLookup = categories.reduce((obj, e, i) => {
+    obj[e] = i;
+    return obj;
+  }, {});
+  const skillsIndexLookup = skills.reduce((obj, e, i) => {
+    obj[e.name] = i;
+    return obj;
+  }, {});
   const normalisedEducation = education.map(educ => {
     const { 'start-year': startYear, 'end-year': endYear, ...rest } = educ;
     return { startYear, endYear, ...rest };
   });
-  const skillsIndex = skills.reduce((obj, e, i) => {
-    obj[e.name] = i;
-    return obj;
-  }, {});
   const normalisedExperiences = experience.map(
     ({ 'start-date': startDate, 'end-date': endDate, skills, ...rest }) => {
       return {
         startDate: startDate.getTime(),
         endDate: endDate?.getTime() ?? null,
-        skills: skills.map(skill => skillsIndex[skill]),
+        skills: skills.map(skill => skillsIndexLookup[skill]),
         duration: duration(startDate, endDate),
         ...rest
       };
     }
   );
-  const categoriesIndexLookup = categories.reduce((obj, e, i) => {
-    obj[e] = i;
-    return obj;
-  }, {});
   const normalisedSkills = skills.map(({ name, categories }, index) => ({
     index,
     name,
@@ -49,20 +49,20 @@ const normaliseCv = ({
       .reduce((running, cur) => running + cur, 0)
   }));
 
-  return [
-    {
+  return {
+    filters: {
       categories: categories.map(category => ({
         name: category,
         selected: false
       })),
       skills: normalisedSkills
     },
-    {
+    cv: {
       ...rest,
       education: normalisedEducation,
       experience: normalisedExperiences
     }
-  ];
+  };
 };
 
 export const fetchCv = () =>
