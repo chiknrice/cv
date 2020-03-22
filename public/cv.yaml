@@ -65,7 +65,7 @@ meta:
       categories: [*lang, *js]
     - name: &kt Kotlin
       categories: [*lang]
-    - name: &grvy Groovy
+    - name: &groovy Groovy
       categories: [*lang]
     - name: &objc Ojbective-C
       categories: [*lang, *mobile]
@@ -205,6 +205,8 @@ meta:
       categories: [*db, *tools, *build, *scm]
     - name: &robomongo RoboMongo
       categories: [*db, *tools]
+    - name: &plsqldeveloper PL/SQL Developer
+      categories: [*db, *tools]
     - name: &navicat Navicat
       categories: [*db, *tools]
     - name: &toad Toad
@@ -291,6 +293,8 @@ meta:
       categories: [*tools, *unix]
     - name: &cvs CVS
       categories: [*tools, *scm]
+    - name: &vss VSS
+      categories: [*tools, *scm]
     - name: &svn SVN
       categories: [*tools, *scm]
     - name: &git Git
@@ -341,27 +345,28 @@ experience:
     team: TODO
     location: New Zealand
     skills:
-      [
-        *js,
-        *react,
-        *redux,
-        *redux-saga,
-        *jest,
-        *java,
-        *servlets,
-        *spring-boot,
-        *spring-webflux,
-        *mobilefirst,
-        *websphere,
-        *rest,
-        *windows,
-        *linux,
-        *maven,
-        *git,
-        *confluence,
-        *bitbucket,
-        *jira,
-      ]
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *maven
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
+      - *java
+      - *js
+      - *react
+      - *redux
+      - *redux-saga
+      - *jest
+      - *servlets
+      - *spring-boot
+      - *spring-webflux
+      - *mobilefirst
+      - *websphere
+      - *rest
 
     projects:
       - title: WestpacONE Enhancements
@@ -383,6 +388,16 @@ experience:
     team: CSP
     location: New Zealand
     skills:
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *maven
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
       - *java
       - *openshift
       - *spring-boot
@@ -391,13 +406,8 @@ experience:
       - *postman
       - *oracle
       - *flyway
-      - *maven
       - *hibernate
-      - *linux
-      - *windows
-      - *jenkins
       - *jenkins-pipeline
-      - *git
 
     projects:
       - title: Canary Deployments
@@ -422,26 +432,34 @@ experience:
     team: Business Owners
     location: New Zealand
     skills:
-      - *java
-      - *spring
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *svn
       - *ant
       - *gradle
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
+      - *java
+      - *spring
       - *sh
       - *py
       - *struts
       - *vaadin
       - *jwt
-      - *grvy
+      - *groovy
       - *geb
       - *spock
       - *docker
       - *docker-swarm
-      - *jenkins
       - *jenkins-pipeline
       - *ansible
       - *ejb
       - *hibernate
-      - *git
 
     projects:
       - title: ADO
@@ -496,6 +514,16 @@ experience:
     team: BAU
     location: New Zealand
     skills:
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *maven
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
       - *java
 
     projects:
@@ -530,6 +558,16 @@ experience:
     team: TPA
     location: New Zealand
     skills:
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *maven
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
       - *java
 
     projects:
@@ -551,6 +589,16 @@ experience:
     team: Online
     location: New Zealand
     skills:
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *maven
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
       - *java
 
     projects:
@@ -576,6 +624,16 @@ experience:
     team: Gateway Platform
     location: New Zealand
     skills:
+      - *windows
+      - *linux
+      - *intellij
+      - *git
+      - *maven
+      - *confluence
+      - *bitbucket
+      - *jira
+      - *jenkins
+
       - *java
 
     projects:
@@ -597,6 +655,14 @@ experience:
     team: Merchant Portal
     location: Philippines
     skills:
+      - *windows
+      - *linux
+      - *eclipse
+      - *cvs
+      - *maven
+      - *mantis
+      - *jenkins
+
       - *java
 
     projects:
@@ -634,6 +700,14 @@ experience:
     team: Merchant Portal
     location: Philippines
     skills:
+      - *windows
+      - *linux
+      - *eclipse
+      - *cvs
+      - *maven
+      - *mantis
+      - *jenkins
+
       - *java
 
     projects:
@@ -674,8 +748,17 @@ experience:
     team: TODO
     location: Singapore
     skills:
+      - *windows
+      - *eclipse
+      - *svn
+      - *jira
+
       - *java
+      - *struts
       - *plsql
+      - *plsqldeveloper
+      - *toad
+      - *oracle
 
     projects:
       - title: Fimatrix Customization
@@ -695,8 +778,27 @@ experience:
     team: Product Development
     location: Singapore
     skills:
+      - *windows
+      - *linux
+      - *eclipse
+      - *cvs
+      - *maven
+      - *mantis
+
       - *java
+      - *servlets
+      - *jsp
+      - *struts
+      - *jaxb
+      - *jaxrs
+      - *jaxws
+
+      - *plsqldeveloper
+      - *toad
       - *plsql
+      - *oracle
+
+      - *qlikview
 
     projects:
       - title: Catalogue Redemption Module
@@ -777,6 +879,13 @@ experience:
     team: Project/Maintenance Services
     location: Singapore
     skills:
+      - *windows
+      - *linux
+      - *eclipse
+      - *cvs
+      - *maven
+      - *mantis
+
       - *java
 
     projects:
@@ -797,6 +906,10 @@ experience:
     company: iPop Networks
     location: Singapore
     skills:
+      - *windows
+      - *eclipse
+      - *vss
+
       - *java
 
     projects:
@@ -851,6 +964,10 @@ experience:
     company: GXS
     location: Philippines
     skills:
+      - *windows
+      - *eclipse
+      - *vss
+
       - *java
 
     projects:
@@ -869,6 +986,10 @@ experience:
     company: Standfirst Mobile
     location: Philippines
     skills:
+      - *windows
+      - *linux
+      - *intellij
+
       - *java
 
     projects:
@@ -899,6 +1020,10 @@ experience:
     company: TinCan Mobile
     location: Philippines
     skills:
+      - *windows
+      - *linux
+      - *bsd
+
       - *java
 
     projects:

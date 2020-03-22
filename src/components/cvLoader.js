@@ -9,12 +9,28 @@ const duration = (startDate, endDate) => {
   return months;
 };
 
+const validateDuplicates = (array, nodeName, getKey = undefined) => {
+  if (
+    array.length !== [...new Set(getKey ? array.map(getKey) : array)].length
+  ) {
+    throw new Error(`Duplicate entries found in ${nodeName}`);
+  }
+};
+
 const normaliseCv = ({
   meta: { categories, skills },
   education,
   experience,
   ...rest
 }) => {
+  validateDuplicates(categories, 'categories');
+  validateDuplicates(skills, 'skills', s => s.name);
+  skills.forEach(s =>
+    validateDuplicates(s.categories, `skills[${s.name}].categories`)
+  );
+  experience.forEach(e =>
+    validateDuplicates(e.skills, `eperience[${e.company}].skills`)
+  );
   const categoriesIndexLookup = categories.reduce((obj, e, i) => {
     obj[e] = i;
     return obj;
