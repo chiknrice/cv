@@ -1,6 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Paper, Typography, Divider } from '@material-ui/core';
+import {
+  Container,
+  Paper,
+  Typography,
+  Divider,
+  useTheme
+} from '@material-ui/core';
 import {
   Chart,
   ArgumentAxis,
@@ -13,7 +19,8 @@ import { RichText } from 'components';
 import {
   sortedSkillsSelector,
   qualificationSummarySelector,
-  filteredSkillsSelector
+  hasSkillFilterSelector,
+  filterDrawerVisibleSelector
 } from 'store/selectors';
 
 const useStyles = makeStyles({
@@ -28,20 +35,47 @@ const useStyles = makeStyles({
   }
 });
 
+const SkillsChart = ({ data }) => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const filterDrawerVisible = useSelector(filterDrawerVisibleSelector);
+  const height = 50 * data.length;
+  return (
+    <Paper elevation={0} className={classes.topPadding}>
+      <Typography variant="h4">Top Skills</Typography>
+      <Chart data={data} rotated height={height}>
+        <ArgumentAxis />
+        <ValueAxis showLabels={false} showGrid={false} />
+        <BarSeries
+          color={theme.palette.secondary.light}
+          argumentField="name"
+          valueField="duration"
+          pointComponent={props => (
+            <BarSeries.Point {...props} maxBarWidth={30} />
+          )}
+        />
+        {filterDrawerVisible ? null : <Animation />}
+      </Chart>
+    </Paper>
+  );
+};
+
 export const Landing = () => {
+  const classes = useStyles();
   const summary = useSelector(qualificationSummarySelector);
   const skills = useSelector(sortedSkillsSelector);
-  const filteredSkills = useSelector(filteredSkillsSelector);
-  const classes = useStyles();
-  const data = (filteredSkills.length === 0
-    ? skills
-    : skills.filter(e => filteredSkills.includes(e.index))
+  const hasSkillFilter = useSelector(hasSkillFilterSelector);
+
+  const data = (hasSkillFilter
+    ? skills.filter(skill => skill.selected)
+    : skills
   )
     .slice(-10)
     .map(({ name, duration }) => ({
       name,
       duration
     }));
+
   return (
     <Paper elevation={0} className={classes.paper}>
       <Container className={classes.topPadding}>
@@ -53,15 +87,7 @@ export const Landing = () => {
           align="justify"
         />
         <Divider className={classes.topMargin} />
-        <Paper elevation={0} className={classes.topPadding}>
-          <Typography variant="h4">Top Skills</Typography>
-          <Chart data={data} rotated>
-            <Animation />
-            <ArgumentAxis />
-            <ValueAxis showLabels={false} />
-            <BarSeries argumentField="name" valueField="duration" />
-          </Chart>
-        </Paper>
+        <SkillsChart data={data} />
       </Container>
     </Paper>
   );

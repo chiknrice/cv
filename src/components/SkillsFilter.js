@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Typography,
   Drawer,
-  Container,
   Box,
   Divider,
   Select,
   MenuItem,
-  Chip,
+  FormControlLabel,
+  Switch,
   IconButton,
   makeStyles
 } from '@material-ui/core';
@@ -17,12 +17,17 @@ import { uiActions } from 'store';
 import {
   filterDrawerVisibleSelector,
   categoriesLookupSelector,
-  selectedCategoriesSelector,
+  usedCategoriesSelector,
   skillsLookupSelector,
-  selectedSkillsSelector
+  usedSkillsSelector,
+  hasSkillFilterSelector
 } from 'store/selectors';
 
 const useStyles = makeStyles(theme => ({
+  drawer: {
+    width: '250px',
+    padding: '10px'
+  },
   select: { width: '100%' },
   label: {
     display: 'flex',
@@ -30,16 +35,16 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     height: '60px'
   },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(0.5)
-    }
+  filterContainer: {
+    overflow: 'scroll',
+    margin: 0,
+    padding: 0
   },
-  drawer: {
-    width: '300px',
-    paddingTop: '40px'
+  filter: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: 0,
+    paddingLeft: '10px'
   },
   divider: {
     marginTop: '10px',
@@ -47,68 +52,97 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Options = ({ options, selected, updateSelected }) => {
-  const classes = useStyles();
+const CategoryDropDown = ({ selected, handleCategorySelected }) => {
   const dispatch = useDispatch();
+  const categories = useSelector(categoriesLookupSelector);
+  const usedCategories = useSelector(usedCategoriesSelector);
+  const hasSkillFilter = useSelector(hasSkillFilterSelector);
+  const skills = useSelector(skillsLookupSelector);
+
+  const classes = useStyles();
   return (
-    <Select
-      className={classes.select}
-      labelId="demo-mutiple-chip-label"
-      id="demo-mutiple-chip"
-      multiple
-      displayEmpty
-      value={selected}
-      onChange={({ target: { value } }) => dispatch(updateSelected(value))}
-      renderValue={selected => (
-        <Box className={classes.chips}>
-          {selected.length === 0
-            ? 'Select Any'
-            : selected.map(index => (
-                <Chip
-                  key={index}
-                  label={options[index].name}
-                  size="small"
-                  variant="outlined"
-                />
-              ))}
-        </Box>
-      )}
-    >
-      {options.map(({ name }, index) => (
-        <MenuItem key={index} value={index}>
-          {name}
-        </MenuItem>
-      ))}
-    </Select>
+    <>
+      <Box className={classes.label}>
+        <Typography variant="h6">Categories</Typography>
+        {hasSkillFilter ? (
+          <IconButton
+            color="inherit"
+            onClick={() =>
+              skills
+                .filter(s => s.selected)
+                .forEach(({ index: skillIndex }) =>
+                  dispatch(
+                    uiActions.setSkillSelected({
+                      skillIndex,
+                      selected: false
+                    })
+                  )
+                )
+            }
+          >
+            <Clear size="small" />
+          </IconButton>
+        ) : null}
+      </Box>
+      <Select
+        className={classes.select}
+        value={selected}
+        displayEmpty
+        onChange={({ target: { value } }) => handleCategorySelected(value)}
+      >
+        {usedCategories.map(index => (
+          <MenuItem key={index} value={index}>
+            {categories[index].name}
+          </MenuItem>
+        ))}
+      </Select>
+    </>
   );
 };
 
-const SelectionLabel = ({ label, selectedItems, setSelectedAction }) => {
+const SkillFilters = ({ category }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const categories = useSelector(categoriesLookupSelector);
+  const skills = useSelector(skillsLookupSelector);
+  const usedSkills = useSelector(usedSkillsSelector);
+  const activeSkills = categories[category].skills.filter(skill =>
+    usedSkills.includes(skill)
+  );
+
   return (
-    <Box className={classes.label}>
-      <Typography variant="h6">{label}</Typography>
-      {selectedItems.length > 0 ? (
-        <IconButton
-          color="inherit"
-          onClick={() => dispatch(setSelectedAction([]))}
-        >
-          <Clear size="small" />
-        </IconButton>
-      ) : null}
+    <Box className={classes.filterContainer}>
+      {activeSkills.map(skillIndex => {
+        const skill = skills[skillIndex];
+        return (
+          <FormControlLabel
+            key={skillIndex}
+            className={classes.filter}
+            labelPlacement="start"
+            control={
+              <Switch
+                checked={skill.selected}
+                onChange={({
+                  target: { value: skillIndex, checked: selected }
+                }) =>
+                  dispatch(uiActions.setSkillSelected({ skillIndex, selected }))
+                }
+                value={skillIndex}
+              />
+            }
+            label={skill.name}
+          />
+        );
+      })}
     </Box>
   );
 };
 
-export const SkillsFilter = ({ visible }) => {
+export const SkillsFilter = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const filterDrawerVisible = useSelector(filterDrawerVisibleSelector);
-  const categories = useSelector(categoriesLookupSelector);
-  const selectedCategories = useSelector(selectedCategoriesSelector);
-  const skills = useSelector(skillsLookupSelector);
-  const selectedSkills = useSelector(selectedSkillsSelector);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   return (
     <Drawer
@@ -116,31 +150,20 @@ export const SkillsFilter = ({ visible }) => {
       open={filterDrawerVisible}
       onClose={() => dispatch(uiActions.setFilterDrawerVisible(false))}
     >
-      <Container maxWidth="xs" className={classes.drawer}>
+      <Box className={classes.drawer}>
         <Typography variant="h4">Filter Skills</Typography>
         <Divider className={classes.divider} />
-        <SelectionLabel
-          label="Categories"
-          selectedItems={selectedCategories}
-          setSelectedAction={uiActions.setCategoriesSelected}
+        <CategoryDropDown
+          selected={selectedCategory}
+          setSele
+          handleCategorySelected={categoryIndex =>
+            setSelectedCategory(categoryIndex)
+          }
         />
-        <Options
-          selected={selectedCategories}
-          options={categories}
-          updateSelected={uiActions.setCategoriesSelected}
-        />
-        <Divider className={classes.divider} />
-        <SelectionLabel
-          label="Skills"
-          selectedItems={selectedSkills}
-          setSelectedAction={uiActions.setSkillsSelected}
-        />
-        <Options
-          selected={selectedSkills}
-          options={skills}
-          updateSelected={uiActions.setSkillsSelected}
-        />
-      </Container>
+      </Box>
+      {typeof selectedCategory === 'number' ? (
+        <SkillFilters category={selectedCategory} />
+      ) : null}
     </Drawer>
   );
 };

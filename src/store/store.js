@@ -4,7 +4,7 @@ const cvSlice = createSlice({
   name: 'cv',
   initialState: {},
   reducers: {
-    setCv: (_, action) => action.payload
+    setCv: (_state, action) => action.payload
   }
 });
 
@@ -15,7 +15,7 @@ const uiSlice = createSlice({
     themeOptions: {
       paletteType: 'light'
     },
-    filters: {
+    filter: {
       drawerVisible: false
     },
     selectedTimelineElement: 0
@@ -29,28 +29,14 @@ const uiSlice = createSlice({
       state.selectedTimelineElement = action.payload;
     },
     setFilterDrawerVisible: (state, action) => {
-      state.filters.drawerVisible = action.payload;
+      state.filter.drawerVisible = action.payload;
     },
-    setFilters: (state, action) => {
-      state.filters = action.payload;
+    setFilter: (state, { payload: { categories, skills } }) => {
+      state.filter.categories = categories;
+      state.filter.skills = skills;
     },
-    setCategoriesSelected: (state, { payload: selectedIndexes }) => {
-      state.filters.categories.forEach((category, index) => {
-        if (category.selected && !selectedIndexes.includes(index)) {
-          category.selected = false;
-        } else if (!category.selected && selectedIndexes.includes(index)) {
-          category.selected = true;
-        }
-      });
-    },
-    setSkillsSelected: (state, { payload: selectedIndexes }) => {
-      state.filters.skills.forEach((skill, index) => {
-        if (skill.selected && !selectedIndexes.includes(index)) {
-          skill.selected = false;
-        } else if (!skill.selected && selectedIndexes.includes(index)) {
-          skill.selected = true;
-        }
-      });
+    setSkillSelected: (state, { payload: { skillIndex, selected } }) => {
+      state.filter.skills[skillIndex].selected = selected;
     }
   }
 });

@@ -17,6 +17,14 @@ const validateDuplicates = (array, nodeName, getKey = undefined) => {
   }
 };
 
+const validateEntriesInKeys = (array, map, mapName) => {
+  array.forEach(e => {
+    if (map[e] === undefined) {
+      throw new Error(`Missing entry ${e} in ${mapName} map`);
+    }
+  });
+};
+
 const normaliseCv = ({
   meta: { categories, skills },
   education,
@@ -25,12 +33,6 @@ const normaliseCv = ({
 }) => {
   validateDuplicates(categories, 'categories');
   validateDuplicates(skills, 'skills', s => s.name);
-  skills.forEach(s =>
-    validateDuplicates(s.categories, `skills[${s.name}].categories`)
-  );
-  experience.forEach(e =>
-    validateDuplicates(e.skills, `eperience[${e.company}].skills`)
-  );
   const categoriesIndexLookup = categories.reduce((obj, e, i) => {
     obj[e] = i;
     return obj;
@@ -39,6 +41,14 @@ const normaliseCv = ({
     obj[e.name] = i;
     return obj;
   }, {});
+  skills.forEach(s => {
+    validateDuplicates(s.categories, `skills[${s.name}].categories`);
+    validateEntriesInKeys(s.categories, categoriesIndexLookup, 'categories');
+  });
+  experience.forEach(e => {
+    validateDuplicates(e.skills, `eperience[${e.company}].skills`);
+    validateEntriesInKeys(e.skills, skillsIndexLookup, 'skills');
+  });
   const normalisedEducation = education.map(educ => {
     const { 'start-year': startYear, 'end-year': endYear, ...rest } = educ;
     return { startYear, endYear, ...rest };
@@ -66,11 +76,8 @@ const normaliseCv = ({
   }));
 
   return {
-    filters: {
-      categories: categories.map(category => ({
-        name: category,
-        selected: false
-      })),
+    filter: {
+      categories,
       skills: normalisedSkills
     },
     cv: {

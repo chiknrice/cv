@@ -51,7 +51,7 @@ meta:
     - &f7k Framework
     - &java Java
     - &js Javascript
-    - &spring Spring
+    - &c_spring Spring
     - &j2ee J2EE
     - &debug Debugging
     - &tools Dev Tools
@@ -80,27 +80,27 @@ meta:
     - name: &plsql PL/SQL
       categories: [*lang, *db]
     - name: &spring Spring Framework
-      categories: [*f7k, *lib, *spring, *server]
+      categories: [*f7k, *lib, *c_spring, *server]
     - name: &spring-boot Spring Boot
-      categories: [*f7k, *lib, *spring, *server]
+      categories: [*f7k, *lib, *c_spring, *server]
     - name: &spring-cloud Spring Cloud
-      categories: [*f7k, *lib, *spring, *server]
+      categories: [*f7k, *lib, *c_spring, *server]
     - name: &spring-batch Spring Batch
-      categories: [*f7k, *lib, *spring, *server]
+      categories: [*f7k, *lib, *c_spring, *server]
     - name: &spring-data Spring Data
-      categories: [*f7k, *lib, *spring, *server, *db]
+      categories: [*f7k, *lib, *c_spring, *server, *db]
     - name: &spring-security Spring Security
-      categories: [*f7k, *lib, *spring, *server]
+      categories: [*f7k, *lib, *c_spring, *server]
     - name: &spring-webflux Spring Webflux
-      categories: [*f7k, *lib, *spring, *server, *web]
+      categories: [*f7k, *lib, *c_spring, *server, *web]
     - name: &spring-ws Spring Web Services
-      categories: [*f7k, *lib, *spring, *server, *web, *i9n]
+      categories: [*f7k, *lib, *c_spring, *server, *web, *i9n]
     - name: &spring-i9n Spring Integration
-      categories: [*f7k, *lib, *spring, *server, *web, *i9n]
+      categories: [*f7k, *lib, *c_spring, *server, *web, *i9n]
     - name: &spring-test Spring Test
-      categories: [*f7k, *lib, *spring, *test]
+      categories: [*f7k, *lib, *c_spring, *test]
     - name: &spring-restdocs Spring REST Docs
-      categories: [*f7k, *lib, *spring, *doc, *test]
+      categories: [*f7k, *lib, *c_spring, *doc, *test]
     - name: &react React
       categories: [*f7k, *lib, *js, *ui]
     - name: &redux Redux

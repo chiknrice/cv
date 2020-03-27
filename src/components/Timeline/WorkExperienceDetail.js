@@ -10,7 +10,7 @@ import {
 import { makeStyles } from '@material-ui/styles';
 import { RichText } from 'components';
 import { useSelector } from 'react-redux';
-import { skillsLookupSelector, filteredSkillsSelector } from 'store/selectors';
+import { skillsLookupSelector } from 'store/selectors';
 
 export const Projects = ({ projects }) => {
   const projectListItems = projects.map(project => (
@@ -46,22 +46,20 @@ const useStyles = makeStyles(theme => ({
 export const WorkExperienceDetail = ({ skills, projects }) => {
   const classes = useStyles();
   const skillsLookup = useSelector(skillsLookupSelector);
-  const filteredSkills = useSelector(filteredSkillsSelector);
   return (
     <>
       <Box className={classes.skills}>
-        {skills.map(skillIndex => (
-          <Chip
-            key={skillIndex}
-            size="small"
-            variant="outlined"
-            color={
-              filteredSkills.includes(skillIndex) ? 'secondary' : 'default'
-            }
-            label={skillsLookup[skillIndex].name}
-            onClick={() => {}}
-          />
-        ))}
+        {skills
+          .map(skillIndex => skillsLookup[skillIndex])
+          .map(({ index, name, selected }) => (
+            <Chip
+              key={index}
+              size="small"
+              variant={selected ? 'default' : 'outlined'}
+              color={selected ? 'secondary' : 'default'}
+              label={name}
+            />
+          ))}
       </Box>
       <Projects projects={projects} />
     </>

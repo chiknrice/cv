@@ -6,60 +6,11 @@ const cvSelector = state => state.cv;
 
 const themeOptionsSelector = createSelector(uiSelector, ui => ui.themeOptions);
 
-const filtersSelector = createSelector(uiSelector, ui => ui.filters);
+const filterSelector = createSelector(uiSelector, ui => ui.filter);
 
-const filterDrawerVisibleSelector = createSelector(
-  filtersSelector,
-  filters => filters.drawerVisible
-);
-
-const categoriesLookupSelector = createSelector(
-  filtersSelector,
-  filters => filters.categories
-);
-
-const selectedCategoriesSelector = createSelector(
-  categoriesLookupSelector,
-  categories =>
-    categories.reduce((container, category, index) => {
-      if (category.selected) container.push(index);
-      return container;
-    }, [])
-);
-
-const skillsLookupSelector = createSelector(
-  filtersSelector,
-  filters => filters.skills
-);
-
-const selectedSkillsSelector = createSelector(skillsLookupSelector, skills =>
-  skills.reduce((container, skill, index) => {
-    if (skill.selected) container.push(index);
-    return container;
-  }, [])
-);
-
-/**
- * Unlike skillsLookup, the position of the element does not represent the lookup position of the skill
- */
-const sortedSkillsSelector = createSelector(skillsLookupSelector, skills =>
-  [...skills].sort((a, b) => a.duration - b.duration)
-);
-
-const filteredSkillsSelector = createSelector(
-  skillsLookupSelector,
-  selectedSkillsSelector,
-  selectedCategoriesSelector,
-  (skills, selectedSkills, selectedCategories) =>
-    skills
-      .filter(
-        (skill, index) =>
-          selectedSkills.includes(index) ||
-          skill.categories.filter(category =>
-            selectedCategories.includes(category)
-          ).length > 0
-      )
-      .map(skill => skill.index)
+const selectedTimelineElementSelector = createSelector(
+  uiSelector,
+  ui => ui.selectedTimelineElement
 );
 
 const personalDetailsSelector = createSelector(cvSelector, cv => ({
@@ -74,13 +25,9 @@ const qualificationSummarySelector = createSelector(
   cv => cv.summary
 );
 
-const selectedTimelineElementSelector = createSelector(
-  uiSelector,
-  ui => ui.selectedTimelineElement
-);
-
 /**
  * Adds index and converts the start and end dates to actual dates
+ * as the dates are not serializable for storing in redux
  */
 const workExperiencesSelector = createSelector(cvSelector, cv =>
   cv.experience.map((exp, index) => {
@@ -93,6 +40,80 @@ const workExperiencesSelector = createSelector(cvSelector, cv =>
       endDate
     };
   })
+);
+
+/**
+ * Flag to show the filter drawer
+ */
+const filterDrawerVisibleSelector = createSelector(
+  filterSelector,
+  filter => filter.drawerVisible
+);
+
+/**
+ * Lookup for the skill (by array index) which contains the skill name and selected flag
+ */
+const skillsLookupSelector = createSelector(
+  filterSelector,
+  filter => filter.skills
+);
+
+/**
+ * Lookup for the category (by array index) which also serves as lookup of skills under
+ * a category
+ */
+const categoriesLookupSelector = createSelector(
+  filterSelector,
+  skillsLookupSelector,
+  (filter, skills) =>
+    filter.categories.map((category, index) => ({
+      name: category,
+      skills: skills
+        .filter(skill => skill.categories.includes(index))
+        .map(({ index }) => index)
+    }))
+);
+
+/**
+ * Selector for minimizing traversal of skills if no skills are selected for filtering
+ */
+const hasSkillFilterSelector = createSelector(
+  skillsLookupSelector,
+  skills => skills.find(skill => skill.selected) !== undefined
+);
+
+/**
+ * Collects all skill indexes used in the experiences for limiting displayed skills in
+ * skills drop down in filter drawer
+ */
+const usedSkillsSelector = createSelector(
+  workExperiencesSelector,
+  workExperiences => [
+    ...new Set(workExperiences.flatMap(({ skills }) => skills))
+  ]
+);
+
+/**
+ * Collects all category indexes which are effectively used by the used skills
+ * (@see usedSkillsSelector) for limiting displayed categories in the categories
+ * drop down in filter drawer
+ */
+const usedCategoriesSelector = createSelector(
+  usedSkillsSelector,
+  skillsLookupSelector,
+  (usedSkills, skills) => {
+    const categories = skills
+      .filter((skill, index) => usedSkills.includes(index))
+      .flatMap(({ categories }) => categories);
+    return [...new Set(categories)];
+  }
+);
+
+/**
+ * Unlike skillsLookup, the position of the element does not represent the lookup position of the skill
+ */
+const sortedSkillsSelector = createSelector(skillsLookupSelector, skills =>
+  [...skills].sort((a, b) => a.duration - b.duration)
 );
 
 const workExperiencesSummarySelector = createSelector(
@@ -124,11 +145,11 @@ export {
   themeOptionsSelector,
   filterDrawerVisibleSelector,
   categoriesLookupSelector,
-  selectedCategoriesSelector,
   skillsLookupSelector,
-  selectedSkillsSelector,
+  usedCategoriesSelector,
+  usedSkillsSelector,
+  hasSkillFilterSelector,
   sortedSkillsSelector,
-  filteredSkillsSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
   selectedExperienceSelector,

@@ -22,12 +22,12 @@ const useStyles = makeStyles({
 });
 
 const { setCv } = cvActions;
-const { setFilters } = uiActions;
+const { setFilter } = uiActions;
 
 const loadApp = () => dispatch =>
   fetchCv()
-    .then(({ filters, cv }) =>
-      Promise.all([dispatch(setCv(cv)), dispatch(setFilters(filters))])
+    .then(({ filter, cv }) =>
+      Promise.all([dispatch(setCv(cv)), dispatch(setFilter(filter))])
     )
     .then(() => import('./App'));
 
