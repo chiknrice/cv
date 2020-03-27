@@ -11,8 +11,13 @@ export const ThemeProvider = ({ children }) => {
   const themeOptions = useSelector(themeOptionsSelector);
   const theme = createMuiTheme({
     palette: {
-      primary: blue,
-      secondary: orange,
+      primary: {
+        main: blue[500]
+      },
+      secondary: {
+        main: orange[500],
+        contrastText: '#fff'
+      },
       type: themeOptions.paletteType
     }
   });

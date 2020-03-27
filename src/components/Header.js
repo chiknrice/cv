@@ -86,7 +86,11 @@ export const Header = () => {
                 <GitHub />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Toggle light/dark theme">
+            <Tooltip
+              title={`Switch to ${
+                theme.palette.type === 'light' ? 'Dark' : 'Light'
+              } Theme`}
+            >
               <IconButton
                 color="inherit"
                 onClick={() => dispatch(uiActions.togglePaletteType())}
