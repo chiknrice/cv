@@ -31,10 +31,8 @@ export const WorkExperience = ({
 
   const labelRef = React.createRef();
 
-  const scrollToTitle = () =>
-    labelRef.current.scrollIntoView({
-      behavior: 'smooth'
-    });
+  // TODO: research how to implement behavior: 'smooth' for Safari in iOS
+  const scrollToTitle = () => labelRef.current.scrollIntoView();
 
   return (
     <Step

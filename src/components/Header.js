@@ -8,7 +8,9 @@ import {
   Hidden,
   Tooltip,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  Menu,
+  MenuItem
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -37,9 +39,116 @@ const useStyles = makeStyles(theme => ({
   offset: theme.mixins.toolbar
 }));
 
-export const Header = React.memo(() => {
-  const { name, shortName, contact } = useSelector(personalDetailsSelector);
+const DesktopMenu = () => {
+  const { contact } = useSelector(personalDetailsSelector);
   const dispatch = useDispatch();
+  const theme = useTheme();
+  return (
+    <Hidden xsDown>
+      <Tooltip title="Email Me">
+        <IconButton color="inherit" href={`mailto:${contact.email}`}>
+          <Email />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={contact.mobile}>
+        <IconButton color="inherit" href={`tel:${contact.email}`}>
+          <PhoneIphone />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="My Github">
+        <IconButton color="inherit" href={contact.github} target="_blank">
+          <GitHub />
+        </IconButton>
+      </Tooltip>
+      <Tooltip
+        title={`Switch to ${
+          theme.palette.type === 'light' ? 'Dark' : 'Light'
+        } Theme`}
+      >
+        <IconButton
+          color="inherit"
+          onClick={() => dispatch(uiActions.togglePaletteType())}
+        >
+          {theme.palette.type === 'light' ? <Brightness4 /> : <Brightness5 />}
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Filter Skills">
+        <IconButton
+          color="inherit"
+          onClick={() => dispatch(uiActions.setFilterDrawerOpen())}
+        >
+          <FilterList />
+        </IconButton>
+      </Tooltip>
+    </Hidden>
+  );
+};
+
+const MobileMenu = () => {
+  const dispatch = useDispatch();
+  const theme = useTheme();
+
+  const ITEM_HEIGHT = 48;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleCloseWithAction = action => () => {
+    handleClose();
+    action();
+  };
+
+  return (
+    <Hidden smUp>
+      <Tooltip title="More">
+        <IconButton color="inherit" onClick={handleClick}>
+          <MoreVert />
+        </IconButton>
+      </Tooltip>
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5
+          }
+        }}
+      >
+        <MenuItem
+          key="0"
+          onClick={handleCloseWithAction(() =>
+            dispatch(uiActions.togglePaletteType())
+          )}
+        >
+          {`Switch to ${
+            theme.palette.type === 'light' ? 'Dark' : 'Light'
+          } Theme`}
+        </MenuItem>
+        <MenuItem
+          key="1"
+          onClick={handleCloseWithAction(() =>
+            dispatch(uiActions.setFilterDrawerOpen())
+          )}
+        >
+          Open Filters
+        </MenuItem>
+      </Menu>
+    </Hidden>
+  );
+};
+
+export const Header = React.memo(() => {
+  const { name, shortName } = useSelector(personalDetailsSelector);
   const classes = useStyles();
   const theme = useTheme();
   // causes re-render on initial load even memoized
@@ -64,54 +173,8 @@ export const Header = React.memo(() => {
               <History />
             </IconButton>
           </Tooltip>
-          <Hidden smUp>
-            <Tooltip title="More">
-              <IconButton color="inherit">
-                <MoreVert />
-              </IconButton>
-            </Tooltip>
-          </Hidden>
-          <Hidden xsDown>
-            <Tooltip title="Email Me">
-              <IconButton color="inherit" href={`mailto:${contact.email}`}>
-                <Email />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={contact.mobile}>
-              <IconButton color="inherit" href={`tel:${contact.email}`}>
-                <PhoneIphone />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="My Github">
-              <IconButton color="inherit" href={contact.github} target="_blank">
-                <GitHub />
-              </IconButton>
-            </Tooltip>
-            <Tooltip
-              title={`Switch to ${
-                theme.palette.type === 'light' ? 'Dark' : 'Light'
-              } Theme`}
-            >
-              <IconButton
-                color="inherit"
-                onClick={() => dispatch(uiActions.togglePaletteType())}
-              >
-                {theme.palette.type === 'light' ? (
-                  <Brightness4 />
-                ) : (
-                  <Brightness5 />
-                )}
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Filter Skills">
-              <IconButton
-                color="inherit"
-                onClick={() => dispatch(uiActions.setFilterDrawerOpen())}
-              >
-                <FilterList />
-              </IconButton>
-            </Tooltip>
-          </Hidden>
+          <MobileMenu />
+          <DesktopMenu />
         </Toolbar>
       </AppBar>
       <div className={classes.offset} />
