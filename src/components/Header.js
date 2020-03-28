@@ -37,11 +37,12 @@ const useStyles = makeStyles(theme => ({
   offset: theme.mixins.toolbar
 }));
 
-export const Header = () => {
+export const Header = React.memo(() => {
   const { name, shortName, contact } = useSelector(personalDetailsSelector);
   const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
+  // causes re-render on initial load even memoized
   const useLong = useMediaQuery('(min-width:663px)');
   return (
     <>
@@ -116,4 +117,4 @@ export const Header = () => {
       <div className={classes.offset} />
     </>
   );
-};
+});

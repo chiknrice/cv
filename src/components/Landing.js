@@ -28,11 +28,11 @@ const useStyles = makeStyles({
     paddingTop: '20px'
   },
   paper: {
-    height: '100%'
+    flexGrow: 1
   }
 });
 
-const SkillsChart = () => {
+const SkillsChart = React.memo(() => {
   const classes = useStyles();
   const theme = useTheme();
   const data = useSelector(topSkillsSelector);
@@ -54,12 +54,11 @@ const SkillsChart = () => {
       </Chart>
     </Paper>
   );
-};
+});
 
-export const Landing = () => {
+export const Landing = React.memo(() => {
   const classes = useStyles();
   const summary = useSelector(qualificationSummarySelector);
-
   return (
     <Paper elevation={0} className={classes.paper}>
       <Container className={classes.topPadding}>
@@ -75,4 +74,4 @@ export const Landing = () => {
       </Container>
     </Paper>
   );
-};
+});

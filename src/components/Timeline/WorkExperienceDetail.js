@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const WorkExperienceDetail = ({ skills, projects }) => {
+export const WorkExperienceDetail = ({ index, skills, projects }) => {
   const classes = useStyles();
   const skillsLookup = useSelector(skillsLookupSelector);
   return (

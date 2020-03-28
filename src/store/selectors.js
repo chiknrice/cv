@@ -139,13 +139,6 @@ const workExperiencesSummarySelector = createSelector(
     )
 );
 
-const selectedExperienceSelector = createSelector(
-  selectedTimelineElementSelector,
-  workExperiencesSelector,
-  (selectedTimelineElement, workExperiences) =>
-    workExperiences[selectedTimelineElement]
-);
-
 /**
  * Collects the top 10 skills either filtered or from the
  */
@@ -176,6 +169,6 @@ export {
   topSkillsSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
-  selectedExperienceSelector,
+  workExperiencesSelector,
   workExperiencesSummarySelector
 };

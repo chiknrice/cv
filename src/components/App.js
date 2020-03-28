@@ -26,7 +26,7 @@ export const App = () => {
         <Header />
         <Switch>
           <Route path="/" exact={true}>
-            <Landing className={classes.bodyContainer} />
+            <Landing />
           </Route>
           <Route path="/timeline">
             <Timeline className={classes.bodyContainer} />

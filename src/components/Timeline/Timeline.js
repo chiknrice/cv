@@ -3,12 +3,8 @@ import { Stepper } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { uiActions } from 'store';
-import {
-  selectedExperienceSelector,
-  workExperiencesSummarySelector
-} from 'store/selectors';
+import { workExperiencesSummarySelector } from 'store/selectors';
 import { WorkExperience } from './WorkExperience';
-import { WorkExperienceDetail } from './WorkExperienceDetail';
 
 const useStyles = makeStyles({
   timeline: {
@@ -18,30 +14,21 @@ const useStyles = makeStyles({
   }
 });
 
-export const Timeline = () => {
-  const dispatch = useDispatch();
-  const selectedTimelineElement = useSelector(selectedExperienceSelector);
-  const experiences = useSelector(workExperiencesSummarySelector);
-  const timelineElements = experiences.map(experience => {
-    const { active, startDate } = experience;
-    const details =
-      active && selectedTimelineElement.projects ? (
-        <WorkExperienceDetail {...selectedTimelineElement} />
-      ) : null;
-    return (
-      <WorkExperience
-        key={startDate}
-        experience={experience}
-        active={active}
-        details={details}
-        handleClick={index =>
-          dispatch(uiActions.setSelectedTimelineElement(index))
-        }
-      />
-    );
-  });
-
+export const Timeline = React.memo(() => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const experiences = useSelector(workExperiencesSummarySelector);
+  // splitting out active prop here actually tells WorkExperience to re-render due to change in prop
+  const timelineElements = experiences.map(({ active, ...rest }) => (
+    <WorkExperience
+      key={rest.startDate}
+      experience={rest}
+      active={active}
+      handleClick={index =>
+        dispatch(uiActions.setSelectedTimelineElement(index))
+      }
+    />
+  ));
 
   return (
     <Stepper
@@ -52,4 +39,4 @@ export const Timeline = () => {
       {timelineElements}
     </Stepper>
   );
-};
+});
