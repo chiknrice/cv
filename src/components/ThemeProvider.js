@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   ThemeProvider as MuiThemeProvider,
-  createMuiTheme
+  createMuiTheme,
+  responsiveFontSizes
 } from '@material-ui/core';
 import { blue, orange } from '@material-ui/core/colors';
 import { useSelector } from 'react-redux';
@@ -21,5 +22,9 @@ export const ThemeProvider = ({ children }) => {
       type: themeOptions.paletteType
     }
   });
-  return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
+  return (
+    <MuiThemeProvider theme={responsiveFontSizes(theme)}>
+      {children}
+    </MuiThemeProvider>
+  );
 };
