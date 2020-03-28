@@ -11,9 +11,6 @@ const useStyles = makeStyles({
     height: '100vh',
     display: 'flex',
     flexDirection: 'column'
-  },
-  bodyContainer: {
-    flexGrow: 1
   }
 });
 
@@ -29,7 +26,7 @@ export const App = () => {
             <Landing />
           </Route>
           <Route path="/timeline">
-            <Timeline className={classes.bodyContainer} />
+            <Timeline />
           </Route>
         </Switch>
         {filterDrawerVisible ? <SkillsFilterDrawer /> : null}

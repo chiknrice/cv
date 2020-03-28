@@ -6,13 +6,16 @@ import { uiActions } from 'store';
 import { workExperiencesSummarySelector } from 'store/selectors';
 import { WorkExperience } from './WorkExperience';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   timeline: {
     overflowY: 'scroll',
     overflowX: 'hidden',
-    height: '100%'
+    flexGrow: 1,
+    [theme.breakpoints.down('xs')]: {
+      padding: '15px'
+    }
   }
-});
+}));
 
 export const Timeline = React.memo(() => {
   const classes = useStyles();

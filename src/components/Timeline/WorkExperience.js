@@ -1,5 +1,12 @@
 import React from 'react';
-import { Typography, Step, StepLabel, StepContent } from '@material-ui/core';
+import {
+  Typography,
+  Step,
+  StepLabel,
+  StepContent,
+  useTheme,
+  useMediaQuery
+} from '@material-ui/core';
 import { Work } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
 import { workExperiencesSelector } from 'store/selectors';
@@ -15,15 +22,20 @@ export const WorkExperience = ({
   handleClick,
   ...stepProps
 }) => {
+  const theme = useTheme();
+  const useLong = useMediaQuery(theme.breakpoints.up('sm'));
   const workExperiences = useSelector(workExperiencesSelector);
-  const label = (
-    <Typography
-      variant={active ? 'h6' : 'subtitle1'}
-    >{`${company} (${location}) - ${role}`}</Typography>
+  const label = useLong ? (
+    <Typography variant="subtitle1">{`${company} (${location}) - ${role}`}</Typography>
+  ) : (
+    <>
+      <Typography variant="subtitle1">{`${company} (${location})`}</Typography>
+      <Typography variant="subtitle2">{role}</Typography>
+    </>
   );
   const caption = (
     <Typography
-      variant={active ? 'subtitle1' : 'subtitle2'}
+      variant="subtitle2"
       color="textSecondary"
     >{`${startDate.toLocaleDateString()} - ${endDate?.toLocaleDateString() ||
       'Present'} (${duration > 12 ? 'Years' : 'Months'})`}</Typography>
@@ -31,8 +43,10 @@ export const WorkExperience = ({
 
   const labelRef = React.createRef();
 
-  // TODO: research how to implement behavior: 'smooth' for Safari in iOS
-  const scrollToTitle = () => labelRef.current.scrollIntoView();
+  const scrollToTitle = () =>
+    labelRef.current.scrollIntoView({
+      behavior: 'smooth'
+    });
 
   return (
     <Step

@@ -14,10 +14,10 @@ import { skillsLookupSelector } from 'store/selectors';
 
 export const Projects = ({ projects }) => {
   const projectListItems = projects.map(project => (
-    <ListItem key={project.title}>
+    <ListItem key={project.title} disableGutters>
       <ListItemText
         disableTypography={true}
-        primary={<Typography variant="body1">{project.title}</Typography>}
+        primary={<Typography variant="subtitle2">{project.title}</Typography>}
         secondary={
           <>
             <RichText
