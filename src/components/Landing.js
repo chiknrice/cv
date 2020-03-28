@@ -39,7 +39,7 @@ const SkillsChart = React.memo(() => {
   const height = 50 * data.length + 50;
   return (
     <Paper elevation={0} className={classes.topPadding}>
-      <Typography variant="h4">Top Skills</Typography>
+      <Typography variant="h6">Top Skills</Typography>
       <Chart data={data} rotated height={height}>
         <ArgumentAxis />
         <BarSeries
@@ -62,7 +62,7 @@ export const Landing = React.memo(() => {
   return (
     <Paper elevation={0} className={classes.paper}>
       <Container className={classes.topPadding}>
-        <Typography variant="h4">Qualification Summary</Typography>
+        <Typography variant="h6">Qualification Summary</Typography>
         <RichText
           text={summary}
           variant="body1"

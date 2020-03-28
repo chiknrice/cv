@@ -10,6 +10,8 @@ import {
   Switch,
   IconButton,
   Chip,
+  InputLabel,
+  FormControl,
   makeStyles
 } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
@@ -33,8 +35,11 @@ const useStyles = makeStyles(theme => ({
   label: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    height: '60px'
+    alignItems: 'center'
+  },
+  closeButton: {
+    padding: 0,
+    marginRight: 12
   },
   filterContainer: {
     overflow: 'scroll',
@@ -62,34 +67,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CategoryDropDown = ({
-  selectedCategory,
-  handleCategorySelected,
-  selectedSkills,
-  setSelectedSkills
-}) => {
+const CategoryDropDown = ({ selectedCategory, handleCategorySelected }) => {
   const categories = useSelector(categoriesLookupSelector);
   const usedCategories = useSelector(usedCategoriesSelector);
 
   const classes = useStyles();
   return (
-    <>
-      <Box className={classes.label}>
-        <Typography variant="h6">Categories</Typography>
-        {selectedSkills.size > 0 ? (
-          <IconButton
-            color="inherit"
-            onClick={() => {
-              selectedSkills.clear();
-              setSelectedSkills([selectedSkills]);
-            }}
-          >
-            <Clear size="small" />
-          </IconButton>
-        ) : null}
-      </Box>
+    <FormControl className={classes.select}>
+      <InputLabel id="category-select-label">Categories</InputLabel>
       <Select
-        className={classes.select}
+        labelId="category-select-label"
         value={selectedCategory}
         displayEmpty
         onChange={({ target: { value } }) => handleCategorySelected(value)}
@@ -100,7 +87,7 @@ const CategoryDropDown = ({
           </MenuItem>
         ))}
       </Select>
-    </>
+    </FormControl>
   );
 };
 
@@ -183,7 +170,21 @@ export const SkillsFilterDrawer = () => {
       }
     >
       <Box className={classes.drawer}>
-        <Typography variant="h4">Filter Skills</Typography>
+        <Box className={classes.label}>
+          <Typography variant="h6">Filter Skills</Typography>
+          {selectedSkills.size > 0 ? (
+            <IconButton
+              className={classes.closeButton}
+              color="inherit"
+              onClick={() => {
+                selectedSkills.clear();
+                setSelectedSkills([selectedSkills]);
+              }}
+            >
+              <Clear size="small" />
+            </IconButton>
+          ) : null}
+        </Box>
         <Divider className={classes.divider} />
         <CategoryDropDown
           selectedCategory={selectedCategory}

@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'hidden',
     flexGrow: 1,
     [theme.breakpoints.down('xs')]: {
-      padding: '15px'
+      padding: '12px'
     }
   }
 }));
