@@ -35,7 +35,8 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1
-  }
+  },
+  offset: theme.mixins.toolbar
 }));
 
 const DesktopMenu = () => {
@@ -151,11 +152,11 @@ export const Header = React.memo(() => {
   const classes = useStyles();
   const theme = useTheme();
   // causes re-render on initial load even memoized
-  const useLong = useMediaQuery('(min-width:663px)');
+  const useLong = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <>
       <AppBar
-        position="sticky"
+        position="fixed"
         color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
       >
         <Toolbar>
@@ -176,6 +177,7 @@ export const Header = React.memo(() => {
           <DesktopMenu />
         </Toolbar>
       </AppBar>
+      <div className={classes.offset} />
     </>
   );
 });
