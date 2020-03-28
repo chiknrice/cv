@@ -10,17 +10,14 @@ import {
 import {
   Chart,
   ArgumentAxis,
-  ValueAxis,
   BarSeries
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
 import { makeStyles } from '@material-ui/styles';
 import { RichText } from 'components';
 import {
-  sortedSkillsSelector,
   qualificationSummarySelector,
-  hasSkillFilterSelector,
-  filterDrawerVisibleSelector
+  topSkillsSelector
 } from 'store/selectors';
 
 const useStyles = makeStyles({
@@ -35,17 +32,16 @@ const useStyles = makeStyles({
   }
 });
 
-const SkillsChart = ({ data }) => {
+const SkillsChart = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const filterDrawerVisible = useSelector(filterDrawerVisibleSelector);
-  const height = 50 * data.length;
+  const data = useSelector(topSkillsSelector);
+  const height = 50 * data.length + 50;
   return (
     <Paper elevation={0} className={classes.topPadding}>
       <Typography variant="h4">Top Skills</Typography>
       <Chart data={data} rotated height={height}>
         <ArgumentAxis />
-        <ValueAxis showLabels={false} showGrid={false} />
         <BarSeries
           color={theme.palette.secondary.light}
           argumentField="name"
@@ -54,7 +50,7 @@ const SkillsChart = ({ data }) => {
             <BarSeries.Point {...props} maxBarWidth={30} />
           )}
         />
-        {filterDrawerVisible ? null : <Animation />}
+        <Animation />
       </Chart>
     </Paper>
   );
@@ -63,18 +59,6 @@ const SkillsChart = ({ data }) => {
 export const Landing = () => {
   const classes = useStyles();
   const summary = useSelector(qualificationSummarySelector);
-  const skills = useSelector(sortedSkillsSelector);
-  const hasSkillFilter = useSelector(hasSkillFilterSelector);
-
-  const data = (hasSkillFilter
-    ? skills.filter(skill => skill.selected)
-    : skills
-  )
-    .slice(-10)
-    .map(({ name, duration }) => ({
-      name,
-      duration
-    }));
 
   return (
     <Paper elevation={0} className={classes.paper}>
@@ -87,7 +71,7 @@ export const Landing = () => {
           align="justify"
         />
         <Divider className={classes.topMargin} />
-        <SkillsChart data={data} />
+        <SkillsChart />
       </Container>
     </Paper>
   );

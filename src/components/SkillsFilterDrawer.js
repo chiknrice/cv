@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   Switch,
   IconButton,
+  Chip,
   makeStyles
 } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
@@ -20,7 +21,7 @@ import {
   usedCategoriesSelector,
   skillsLookupSelector,
   usedSkillsSelector,
-  hasSkillFilterSelector
+  selectedSkillsSelector
 } from 'store/selectors';
 
 const useStyles = makeStyles(theme => ({
@@ -49,36 +50,39 @@ const useStyles = makeStyles(theme => ({
   divider: {
     marginTop: '10px',
     marginBottom: '10px'
+  },
+  summaryContainer: {
+    width: '250px',
+    padding: '10px',
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5)
+    }
   }
 }));
 
-const CategoryDropDown = ({ selected, handleCategorySelected }) => {
-  const dispatch = useDispatch();
+const CategoryDropDown = ({
+  selectedCategory,
+  handleCategorySelected,
+  selectedSkills,
+  setSelectedSkills
+}) => {
   const categories = useSelector(categoriesLookupSelector);
   const usedCategories = useSelector(usedCategoriesSelector);
-  const hasSkillFilter = useSelector(hasSkillFilterSelector);
-  const skills = useSelector(skillsLookupSelector);
 
   const classes = useStyles();
   return (
     <>
       <Box className={classes.label}>
         <Typography variant="h6">Categories</Typography>
-        {hasSkillFilter ? (
+        {selectedSkills.size > 0 ? (
           <IconButton
             color="inherit"
-            onClick={() =>
-              skills
-                .filter(s => s.selected)
-                .forEach(({ index: skillIndex }) =>
-                  dispatch(
-                    uiActions.setSkillSelected({
-                      skillIndex,
-                      selected: false
-                    })
-                  )
-                )
-            }
+            onClick={() => {
+              selectedSkills.clear();
+              setSelectedSkills([selectedSkills]);
+            }}
           >
             <Clear size="small" />
           </IconButton>
@@ -86,7 +90,7 @@ const CategoryDropDown = ({ selected, handleCategorySelected }) => {
       </Box>
       <Select
         className={classes.select}
-        value={selected}
+        value={selectedCategory}
         displayEmpty
         onChange={({ target: { value } }) => handleCategorySelected(value)}
       >
@@ -100,11 +104,10 @@ const CategoryDropDown = ({ selected, handleCategorySelected }) => {
   );
 };
 
-const SkillFilters = ({ category }) => {
+const SkillFilters = ({ category, selectedSkills, handleFilterChange }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const categories = useSelector(categoriesLookupSelector);
-  const skills = useSelector(skillsLookupSelector);
+  const skillsLookup = useSelector(skillsLookupSelector);
   const usedSkills = useSelector(usedSkillsSelector);
   const activeSkills = categories[category].skills.filter(skill =>
     usedSkills.includes(skill)
@@ -113,7 +116,6 @@ const SkillFilters = ({ category }) => {
   return (
     <Box className={classes.filterContainer}>
       {activeSkills.map(skillIndex => {
-        const skill = skills[skillIndex];
         return (
           <FormControlLabel
             key={skillIndex}
@@ -121,16 +123,12 @@ const SkillFilters = ({ category }) => {
             labelPlacement="start"
             control={
               <Switch
-                checked={skill.selected}
-                onChange={({
-                  target: { value: skillIndex, checked: selected }
-                }) =>
-                  dispatch(uiActions.setSkillSelected({ skillIndex, selected }))
-                }
+                checked={selectedSkills.has(skillIndex)}
+                onChange={handleFilterChange}
                 value={skillIndex}
               />
             }
-            label={skill.name}
+            label={skillsLookup[skillIndex].name}
           />
         );
       })}
@@ -138,32 +136,73 @@ const SkillFilters = ({ category }) => {
   );
 };
 
-export const SkillsFilter = () => {
+const SelectedSkillsSummary = ({ selectedSkills }) => {
+  const skillsLookup = useSelector(skillsLookupSelector);
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.summaryContainer}>
+      {[...selectedSkills].map(index => (
+        <Chip
+          key={index}
+          size="small"
+          variant="outlined"
+          label={skillsLookup[index].name}
+        />
+      ))}
+    </Box>
+  );
+};
+
+export const SkillsFilterDrawer = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const filterDrawerVisible = useSelector(filterDrawerVisibleSelector);
+  const alreadySelectedSkills = useSelector(selectedSkillsSelector);
   const [selectedCategory, setSelectedCategory] = useState('');
+  // wrapping with array to maintain the same mutable set
+  const [[selectedSkills], setSelectedSkills] = useState([
+    new Set(alreadySelectedSkills)
+  ]);
+
+  const handleFilterChange = ({ target: { checked, value: index } }) => {
+    if (checked) {
+      selectedSkills.add(parseInt(index));
+    } else {
+      selectedSkills.delete(parseInt(index));
+    }
+    setSelectedSkills([selectedSkills]);
+  };
 
   return (
     <Drawer
       anchor="right"
       open={filterDrawerVisible}
-      onClose={() => dispatch(uiActions.setFilterDrawerVisible(false))}
+      onClose={() =>
+        dispatch(uiActions.setFilterDrawerClose([...selectedSkills]))
+      }
     >
       <Box className={classes.drawer}>
         <Typography variant="h4">Filter Skills</Typography>
         <Divider className={classes.divider} />
         <CategoryDropDown
-          selected={selectedCategory}
-          setSele
+          selectedCategory={selectedCategory}
+          selectedSkills={selectedSkills}
+          setSelectedSkills={setSelectedSkills}
           handleCategorySelected={categoryIndex =>
             setSelectedCategory(categoryIndex)
           }
         />
       </Box>
       {typeof selectedCategory === 'number' ? (
-        <SkillFilters category={selectedCategory} />
-      ) : null}
+        <SkillFilters
+          category={selectedCategory}
+          selectedSkills={selectedSkills}
+          handleFilterChange={handleFilterChange}
+        />
+      ) : (
+        <SelectedSkillsSummary selectedSkills={selectedSkills} />
+      )}
     </Drawer>
   );
 };

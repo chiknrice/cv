@@ -75,11 +75,10 @@ const categoriesLookupSelector = createSelector(
 );
 
 /**
- * Selector for minimizing traversal of skills if no skills are selected for filtering
+ * Collects all skill indexes which are selected for filtering
  */
-const hasSkillFilterSelector = createSelector(
-  skillsLookupSelector,
-  skills => skills.find(skill => skill.selected) !== undefined
+const selectedSkillsSelector = createSelector(skillsLookupSelector, skills =>
+  skills.filter(skill => skill.selected).map(({ index }) => index)
 );
 
 /**
@@ -110,10 +109,16 @@ const usedCategoriesSelector = createSelector(
 );
 
 /**
- * Unlike skillsLookup, the position of the element does not represent the lookup position of the skill
+ * Unlike skillsLookup, the position of the element does not represent the lookup position of the skill,
+ * also, the skills included in the sorted skills are only used ones
  */
-const sortedSkillsSelector = createSelector(skillsLookupSelector, skills =>
-  [...skills].sort((a, b) => a.duration - b.duration)
+const sortedSkillsSelector = createSelector(
+  skillsLookupSelector,
+  usedSkillsSelector,
+  (skills, usedSkills) =>
+    skills
+      .filter(({ index }) => usedSkills.includes(index))
+      .sort((a, b) => a.duration - b.duration)
 );
 
 const workExperiencesSummarySelector = createSelector(
@@ -141,6 +146,24 @@ const selectedExperienceSelector = createSelector(
     workExperiences[selectedTimelineElement]
 );
 
+/**
+ * Collects the top 10 skills either filtered or from the
+ */
+const topSkillsSelector = createSelector(
+  sortedSkillsSelector,
+  selectedSkillsSelector,
+  (sortedSkills, selectedSkills) =>
+    (selectedSkills.length > 0
+      ? sortedSkills.filter(skill => skill.selected)
+      : sortedSkills
+    )
+      .slice(-10)
+      .map(({ name, duration }) => ({
+        name,
+        duration
+      }))
+);
+
 export {
   themeOptionsSelector,
   filterDrawerVisibleSelector,
@@ -148,8 +171,9 @@ export {
   skillsLookupSelector,
   usedCategoriesSelector,
   usedSkillsSelector,
-  hasSkillFilterSelector,
+  selectedSkillsSelector,
   sortedSkillsSelector,
+  topSkillsSelector,
   personalDetailsSelector,
   qualificationSummarySelector,
   selectedExperienceSelector,

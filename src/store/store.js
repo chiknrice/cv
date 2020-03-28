@@ -28,15 +28,22 @@ const uiSlice = createSlice({
     setSelectedTimelineElement: (state, action) => {
       state.selectedTimelineElement = action.payload;
     },
-    setFilterDrawerVisible: (state, action) => {
-      state.filter.drawerVisible = action.payload;
+    setFilterDrawerOpen: state => {
+      state.filter.drawerVisible = true;
     },
     setFilter: (state, { payload: { categories, skills } }) => {
       state.filter.categories = categories;
       state.filter.skills = skills;
     },
-    setSkillSelected: (state, { payload: { skillIndex, selected } }) => {
-      state.filter.skills[skillIndex].selected = selected;
+    setFilterDrawerClose: (state, { payload: selectedIndexes }) => {
+      state.filter.skills.forEach((skill, index) => {
+        if (skill.selected && !selectedIndexes.includes(index)) {
+          skill.selected = false;
+        } else if (!skill.selected && selectedIndexes.includes(index)) {
+          skill.selected = true;
+        }
+      });
+      state.filter.drawerVisible = false;
     }
   }
 });

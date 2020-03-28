@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-import { Header, Landing, Timeline, SkillsFilter } from 'components';
+import { Header, Landing, Timeline, SkillsFilterDrawer } from 'components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
+import { filterDrawerVisibleSelector } from 'store/selectors';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   container: {
@@ -17,6 +19,7 @@ const useStyles = makeStyles({
 
 export const App = () => {
   const classes = useStyles();
+  const filterDrawerVisible = useSelector(filterDrawerVisibleSelector);
   return (
     <Container maxWidth="md" className={classes.container} disableGutters>
       <Router>
@@ -29,7 +32,7 @@ export const App = () => {
             <Timeline className={classes.bodyContainer} />
           </Route>
         </Switch>
-        <SkillsFilter />
+        {filterDrawerVisible ? <SkillsFilterDrawer /> : null}
       </Router>
     </Container>
   );

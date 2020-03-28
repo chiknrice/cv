@@ -105,7 +105,7 @@ export const Header = () => {
             <Tooltip title="Filter Skills">
               <IconButton
                 color="inherit"
-                onClick={() => dispatch(uiActions.setFilterDrawerVisible(true))}
+                onClick={() => dispatch(uiActions.setFilterDrawerOpen())}
               >
                 <FilterList />
               </IconButton>
