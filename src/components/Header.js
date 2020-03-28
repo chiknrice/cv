@@ -35,8 +35,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1
-  },
-  offset: theme.mixins.toolbar
+  }
 }));
 
 const DesktopMenu = () => {
@@ -156,7 +155,7 @@ export const Header = React.memo(() => {
   return (
     <>
       <AppBar
-        position="fixed"
+        position="sticky"
         color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
       >
         <Toolbar>
@@ -177,7 +176,6 @@ export const Header = React.memo(() => {
           <DesktopMenu />
         </Toolbar>
       </AppBar>
-      <div className={classes.offset} />
     </>
   );
 });
