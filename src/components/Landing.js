@@ -20,17 +20,23 @@ import {
   topSkillsSelector
 } from 'store/selectors';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   topMargin: {
-    marginTop: '20px'
+    marginTop: '20px',
+    [theme.breakpoints.down('xs')]: {
+      marginTop: '12px'
+    }
   },
   topPadding: {
-    paddingTop: '20px'
+    paddingTop: '20px',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: '12px'
+    }
   },
   paper: {
     flexGrow: 1
   }
-});
+}));
 
 const SkillsChart = React.memo(() => {
   const classes = useStyles();

@@ -44,7 +44,6 @@ export const WorkExperience = ({
   const labelRef = React.createRef();
 
   const scrollToTitle = () => {
-    window.scrollTo(0, 1);
     labelRef.current.scrollIntoView({
       behavior: 'smooth'
     });
