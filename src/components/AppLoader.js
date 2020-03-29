@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { uiActions, cvActions } from 'store';
 import { fetchCv } from 'components/cvLoader';
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '101vh'
+    height: '100vh'
   }
 });
 
@@ -31,28 +31,9 @@ const loadApp = () => dispatch =>
     )
     .then(() => import('./App'));
 
-const Loader = () => {
-  const classes = useStyles();
-
-  useEffect(() => {
-    if (
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i)
-    ) {
-      /* iOS hides Safari address bar */
-      window.scrollTo(0, 1);
-    }
-  });
-
-  return (
-    <Container className={classes.loaderContainer}>
-      <CircularProgress />
-    </Container>
-  );
-};
-
 export const AppLoader = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const [error, setError] = useState(null);
   const [LoadedApp, setLoadedApp] = useState(null);
   const [doLoadApp, setDoLoadApp] = useState(true);
@@ -84,6 +65,10 @@ export const AppLoader = () => {
       </Dialog>
     );
   } else {
-    return <Loader />;
+    return (
+      <Container className={classes.loaderContainer}>
+        <CircularProgress />
+      </Container>
+    );
   }
 };
