@@ -45,8 +45,7 @@ export const WorkExperience = ({
 
   const scrollToTitle = () => {
     const ios =
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i);
+      !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     labelRef.current.scrollIntoView({
       behavior: 'smooth',
       block: ios ? 'nearest' : 'start'
