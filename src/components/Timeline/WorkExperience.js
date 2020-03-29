@@ -44,10 +44,12 @@ export const WorkExperience = ({
   const labelRef = React.createRef();
 
   const scrollToTitle = () => {
-    const ios = window.matchMedia('(-webkit-touch-callout: none)');
+    const ios =
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i);
     labelRef.current.scrollIntoView({
       behavior: 'smooth',
-      block: ios.matches ? 'nearest' : 'start'
+      block: ios ? 'nearest' : 'start'
     });
   };
 
